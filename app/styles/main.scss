@@ -1,0 +1,227 @@
+@import 'bourbon/bourbon';
+
+body {
+    background: #1a1a1a;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #333;
+}
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+.about {
+  width: 100%;
+  background: saturate(#e9d723, 10%);
+  margin: 0;
+  padding: 20px 0;
+  @include animation-duration(2s);
+  @include transition (all 0.3s ease-in-out);
+
+  h3 {
+    text-align: center;
+    font-weight: 300;
+    font-size: 1.3em;
+    margin: 0;
+    padding: 0;
+    color: #551A8B;
+    @include transition (all 0.3s ease-in-out);
+
+    a {
+      padding: 4px 0px;
+      border-bottom: 2px solid #D62C1A;
+      color: #D62C1A;
+      text-decoration: none;
+      @include border-left-radius(0px);
+      @include border-right-radius(0px);
+      @include transition (all 0.3s ease-in-out);
+    }
+
+    a:hover {
+      background: #D62C1A;
+      color: #fff;
+      @include border-left-radius(0px);
+      @include border-right-radius(0px);
+    }
+
+    i {
+      padding: 0 8px;
+      color: darken(#F5E117, 10%);
+    }
+
+    b {
+      color: #fff;
+    }
+  }
+}
+
+.grid {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: relative;
+    width: 100%;
+
+    li {
+      position: relative;
+      float: left;
+      overflow: hidden;
+      width: 16.6666667%; // Fallback
+      width: -webkit-calc(100% / 6);
+      width: calc(100% / 6);
+      @include transition (all 0.3s ease-in-out);
+
+      a, a > img {
+        display: block;
+        width: 100%;
+        cursor: pointer;
+        // Fix images with different heights (This works!!!???)
+        min-height: -webkit-calc(50% / 1);
+        min-height: calc(50% / 1);
+        max-height: -webkit-calc(50% / 1);
+        max-height: calc(50% / 1);
+      }
+
+      a > img {
+        max-width: 100%;
+      }
+
+      a > div {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        @include background-image(linear-gradient(transparent 0, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.7) 80%, rgba(0,0,0,1) 100%));
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: flex;
+        -webkit-align-items: center;
+        -moz-align-items: center;
+        -ms-align-items: center;
+        align-items: center;
+        text-align: center;
+        opacity: 0;
+        cursor: pointer;
+        @include transition (all 0.3s ease-in-out);
+
+        h3 {
+          width: 100%;
+          color: #fff;
+          text-transform: uppercase;
+          font-size: 1.4em;
+          letter-spacing: 2px;
+          padding: 0 20px;
+          display: none;
+          cursor: pointer;
+        }
+      }
+
+      a:hover > div {
+        opacity: 1;
+
+        h3 {
+          display: block;
+          @include animation-duration(0.5s);
+        }
+      }
+  }
+}
+
+// Responsiveness - change number of items per row
+
+@media screen and (max-width: 1190px) {
+  .grid {
+    li {
+      width: 20%; // Fallback
+      width: -webkit-calc(100% / 5);
+      width: calc(100% / 5);
+    }
+  }
+}
+
+@media screen and (max-width: 945px) {
+  .grid {
+    li {
+      width: 25%; // Fallback
+      width: -webkit-calc(100% / 4);
+      width: calc(100% / 4);
+    }
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .grid {
+    li {
+      width: 33.333333%; // Fallback
+      width: -webkit-calc(100% / 3);
+      width: calc(100% / 3);
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .grid {
+    li {
+      width: 50%; // Fallback
+      width: -webkit-calc(100% / 2);
+      width: calc(100% / 2);
+    }
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .grid {
+    li {
+      width: 100%;
+    }
+  }
+}
+
+.growIn {
+  @include animation-name(growIn);
+}
+
+// Animation
+
+@-webkit-keyframes growIn {
+  from {
+    @include transform(scale(0.0));
+  }
+
+  to {
+    @include transform(scale(1.0));
+  }
+}
+
+@keyframes growIn {
+  from {
+    @include transform(scale(0.0));
+  }
+
+  to {
+    @include transform(scale(1.0));
+  }
+}
+
+// Animation delay timings - for random entrance
+
+.delay-20ms {
+  @include animation-delay(0.2s);
+}
+
+.delay-30ms {
+  @include animation-delay(0.4s);
+}
+
+.delay-40ms {
+  @include animation-delay(0.4s);
+}
+
+.delay-50ms {
+  @include animation-delay(0.5s);
+}

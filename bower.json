@@ -1,0 +1,15 @@
+{
+  "name": "movies",
+  "private": true,
+  "dependencies": {
+    "modernizr": "~2.6.2",
+    "normalize.css": "~3.0.1",
+    "animate.css": "~3.1.1",
+    "fontawesome": "~4.0.3",
+    "angular": "~1.2.16",
+    "angular-resource": "~1.2.16",
+    "angular-animate": "~1.2.16",
+    "angular-route": "~1.2.16"
+  },
+  "devDependencies": {}
+}
