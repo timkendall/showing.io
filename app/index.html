@@ -15,6 +15,7 @@
         <!-- endbower -->
         <!-- endbuild -->
 
+        <link rel="stylesheet" href="styles/bootstrap_custom/css/bootstrap.min.css">
         <!-- build:css styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
         <!--<link rel="stylesheet" href="bower_components/toast/toast.css">-->
@@ -25,23 +26,39 @@
         <!-- endbuild -->
     </head>
     <body ng-controller="IndexCtrl">
+
         <!--[if lt IE 10]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <div class="about animated slideInDown">
+        <!--<div class="about animated slideInDown">
             <h3>crafted by <a href="http://timkendall.com">Tim Kendall</a> <i class="fa fa-star"></i> <b>about</b></h3>
+        </div>-->
+        <div class="wrapper">
+            <nav class="animated slideInDown">
+                <div class="btn-group">
+                    <a href="#!/theaters" class="btn btn-default" ng-class='{ active: isActive("theaters")}'>In Theaters</a>
+                    <a href="#!/opening" class="btn btn-default" ng-class='{ active: isActive("opening")}'>Opening</a>
+                    <a href="#!/upcoming" class="btn btn-default" ng-class='{ active: isActive("upcoming")}'>Upcoming</a>
+                </div>
+
+                <input type="text" class="form-control" placeholder="Search movies" ng-model="search">
+
+                <div class="clearfix"></div>
+            </nav>
+
+            <div ng-view>
+            </div>
         </div>
 
-        <ul class="grid">
-           <li ng-repeat="movie in movies | orderBy:'-release_dates.theater'">
-            <a ng-href="{{movie.links.alternate}}" target="_blank" class="animated growIn" ng-random-class ng-classes="classes"><img ng-src="{{movie.posters.original}}" />
-                <div>
-                    <h3 class="animated fadeInUp">{{movie.title}} <br /> {{movie.ratings.audience_score}}%</h3>
-                </div>
-            </a>
-           </li>
-        </ul>
+        <footer>
+            <h3>crafted by <a href="http://timkendall.com">Tim Kendall</a>
+            <br />
+            <i class="fa fa-star"></i>
+            </h3>
+
+            <p>Movies is a site created for those who want to quickly see what movies are playing/opening/upcoming without wading through ads on the big sites. The movie ratings represent Rotten Tomatoe's user reviews because those are the ones that matter. Shoot me an email if you have any suggestions. <br /><b>-Tim</b></p>
+        </footer>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
@@ -71,6 +88,8 @@
         <script src="scripts/filters.js"></script>
         <!-- Application Directives -->
         <script src="scripts/directives/ngRandomClass.js"></script>
+        <script src="scripts/directives/ratometer.js"></script>
+        <script src="scripts/directives/max-height.js"></script>
         <!-- Application Services -->
         <script src="scripts/services/global.js"></script>
         <!-- Application Controllers -->

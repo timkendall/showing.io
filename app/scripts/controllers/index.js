@@ -1,7 +1,9 @@
 'use strict';
 
-angular.module('Movies.system').controller('IndexCtrl', ['$scope', '$http','Global', function ($scope, $http, Global) {
+angular.module('Movies.system').controller('IndexCtrl', ['$scope', '$http', '$location', 'Global', function ($scope, $http, $location, Global) {
     $scope.global = Global;
+
+    $scope.movies = [];
 
     // List classes for random delays
     $scope.classes = [
@@ -11,20 +13,54 @@ angular.module('Movies.system').controller('IndexCtrl', ['$scope', '$http','Glob
       'delay-50ms'
     ];
 
-    $http.jsonp('http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=hj3r7yx59y8j6z6wvrv3r65a&limit=20&callback=JSON_CALLBACK').
-    success(function(data, status, headers, config) {
-      // this callback will be called asynchronously
-      // when the response is available
-      console.log(data.found);
-      $scope.movies = data.movies;
+    // Highlight current tab
+    $scope.isActive = function (view) {
+      return ( '/' + view ) === $location.path();
+    };
 
-    }).
-    error(function(data, status, headers, config) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
-    });
+    $scope.getInTheaters = function () {
+      $http.jsonp('http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?apikey=hj3r7yx59y8j6z6wvrv3r65a&limit=20&callback=JSON_CALLBACK').
+        success(function(data, status, headers, config) {
+          // this callback will be called asynchronously
+          // when the response is available
 
+          $scope.movies = data.movies;
 
-    //  $http({method: 'GET', url: 'https://api.themoviedb.org/3/movie/now_playing?api_key=202daf17374de192b4c6c8d0ee8d1bc8'}).
+        }).
+        error(function(data, status, headers, config) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+        });
+    };
+
+    $scope.getOpening = function () {
+      $http.jsonp('http://api.rottentomatoes.com/api/public/v1.0/lists/movies/opening.json?apikey=hj3r7yx59y8j6z6wvrv3r65a&limit=20&callback=JSON_CALLBACK').
+        success(function(data, status, headers, config) {
+          // this callback will be called asynchronously
+          // when the response is available
+
+          $scope.movies = data.movies;
+
+        }).
+        error(function(data, status, headers, config) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+        });
+    };
+
+    $scope.getUpcoming = function () {
+      $http.jsonp('http://api.rottentomatoes.com/api/public/v1.0/lists/movies/upcoming.json?apikey=hj3r7yx59y8j6z6wvrv3r65a&limit=20&callback=JSON_CALLBACK').
+        success(function(data, status, headers, config) {
+          // this callback will be called asynchronously
+          // when the response is available
+
+          $scope.movies = data.movies;
+
+        }).
+        error(function(data, status, headers, config) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+        });
+    };
 
 }]);

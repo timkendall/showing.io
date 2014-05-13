@@ -1,0 +1,14 @@
+<ul class="grid" ng-init="getOpening()">
+           <li ng-repeat="movie in movies | orderBy:'-release_dates.theater' | filter:search">
+            <a ng-href="{{movie.links.alternate}}" target="_blank" class="animated growIn" ng-random-class ng-classes="classes"><img ng-src="{{movie.posters.original}}" max-height="40/27" />
+                <div>
+                    <h3 class="animated fadeInUp">{{movie.title}}</h3>
+                    <h3>
+                        <i class="fa fa-heart" ratometer="{{movie.ratings.audience_score}}"></i> <br />
+                        <span class="percent">{{movie.ratings.audience_score}}%</span>
+                    </h3>
+
+                </div>
+            </a>
+           </li>
+        </ul>
