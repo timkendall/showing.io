@@ -6,7 +6,7 @@
         <meta name="description" content="BoxOffice.io - Movies in theaters">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
+        <link rel="shortcut icon" href="/favicon.ico">
         <!-- build:css styles/vendor.css -->
         <!-- bower:css -->
         <link rel="stylesheet" href="bower_components/normalize.css/normalize.css" />
@@ -14,11 +14,9 @@
         <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
         <!-- endbower -->
         <!-- endbuild -->
-
         <link rel="stylesheet" href="styles/bootstrap_custom/css/bootstrap.min.css">
         <!-- build:css styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
-        <!--<link rel="stylesheet" href="bower_components/toast/toast.css">-->
         <!-- endbuild -->
 
         <!-- build:js scripts/vendor/modernizr.js -->
@@ -37,9 +35,9 @@
         <div class="wrapper">
             <nav class="animated slideInDown">
                 <div class="btn-group">
-                    <a href="#!/theaters" class="btn btn-default" ng-class='{ active: isActive("theaters")}'>In Theaters</a>
-                    <a href="#!/opening" class="btn btn-default" ng-class='{ active: isActive("opening")}'>Opening</a>
-                    <a href="#!/upcoming" class="btn btn-default" ng-class='{ active: isActive("upcoming")}'>Upcoming</a>
+                    <a href="#!/theaters" class="btn btn-default" ng-click="clearMovies()" ng-class='{ active: isActive("theaters")}'>In Theaters</a>
+                    <a href="#!/opening" class="btn btn-default" ng-click="clearMovies()" ng-class='{ active: isActive("opening")}'>Opening</a>
+                    <a href="#!/upcoming" class="btn btn-default" ng-click="clearMovies()" ng-class='{ active: isActive("upcoming")}'>Upcoming</a>
                 </div>
 
                 <input type="text" class="form-control" placeholder="Search movies" ng-model="search">
@@ -57,7 +55,7 @@
             <i class="fa fa-star"></i>
             </h3>
 
-            <p>Movies is a site created for those who want to quickly see what movies are playing/opening/upcoming without wading through ads on the big sites. The movie ratings represent Rotten Tomatoe's user reviews because those are the ones that matter. Shoot me an email if you have any suggestions. <br /><b>-Tim</b></p>
+            <p>Movies is a site created for those who want to quickly see what movies are playing/opening/upcoming without wading through ads on the big sites. The movie ratings represent Rotten Tomatoe's user reviews because those are the ones that matter. Shoot me a message <a href="https://twitter.com/TboyTim">@tboytim</a> if you have any suggestions. <br /><b>-Tim</b></p>
         </footer>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
@@ -90,11 +88,13 @@
         <script src="scripts/directives/ngRandomClass.js"></script>
         <script src="scripts/directives/ratometer.js"></script>
         <script src="scripts/directives/max-height.js"></script>
+        <script src="scripts/directives/image-preload.js"></script>
         <!-- Application Services -->
         <script src="scripts/services/global.js"></script>
         <!-- Application Controllers -->
         <script src="scripts/controllers/index.js"></script>
 
         <script src="scripts/init.js"></script>
+        <script src="//src.responsive.io/r.js"></script>
 </body>
 </html>

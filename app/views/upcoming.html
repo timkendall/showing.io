@@ -1,6 +1,6 @@
 <ul class="grid" ng-init="getUpcoming()">
            <li ng-repeat="movie in movies | orderBy:'-release_dates.theater' | filter:search">
-            <a ng-href="{{movie.links.alternate}}" target="_blank" class="animated growIn" ng-random-class ng-classes="classes"><img ng-src="{{movie.posters.original}}" max-height="40/27" />
+            <a ng-href="{{movie.links.alternate}}" target="_blank" ><img ng-src="{{movie.posters.detailed}}" max-height="40/27" ng-classes="classes" />
                 <div>
                     <h3 class="animated fadeInUp">{{movie.title}}</h3>
                     <h3>

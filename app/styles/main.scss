@@ -4,9 +4,10 @@ body {
     background: #1a1a1a;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
-     display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+    // Quick sticky footer
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
 
 // For sticky footer
@@ -22,23 +23,17 @@ body {
 }
 
 nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   margin: 0;
+  height: 75px;
+  z-index: 999;
   padding: 20px;
-  //background: saturate(#e9d723, 10%);
+  border-bottom: 1px solid lighten(#1a1a1a, 10%);
   background: #1a1a1a;
-  /*
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flex;
-  display: flex;
-  flex-direction: column;
-  -webkit-flex-direction: column;
-  -webkit-align-items: center;
-  -moz-align-items: center;
-  -ms-align-items: center;
-  align-items: center;
-  -webkit-justify-content: center;
-  justify-content: center;*/
 
   .form-control {
     float: right;
@@ -70,7 +65,7 @@ nav {
 
   .btn-default.active, .btn-default:hover {
     background: saturate(#e9d723, 10%);
-    border-color: darken(#e9d723, 80%);
+    border-color: saturate(#e9d723, 10%);
     box-shadow: none;
     color: darken(#e9d723, 80%);
   }
@@ -81,7 +76,6 @@ footer {
   background: #F01700;
   margin: 0;
   padding: 40px 0;
-  border-top: 1px solid lighten(#1a1a1a, 10%);
   @include animation-duration(2s);
   @include transition (all 0.3s ease-in-out);
 
@@ -106,7 +100,7 @@ footer {
 
     a:hover {
       background: saturate(#e9d723, 10%);
-      color: #fff;
+      color: darken(#e9d723, 40%);
       text-decoration: none;
       @include border-left-radius(2px);
       @include border-right-radius(2px);
@@ -128,6 +122,19 @@ footer {
     margin: 0 auto;
     color: lighten(#F01700, 50%);
 
+    a {
+      color: saturate(#e9d723, 10%);
+      @include transition (all 0.3s ease-in-out);
+    }
+
+    a:hover {
+      background: saturate(#e9d723, 10%);
+      color: darken(#e9d723, 40%);
+      text-decoration: none;
+      @include border-left-radius(2px);
+      @include border-right-radius(2px);
+    }
+
     b {
       font-weight: 400;
       color: #fff;
@@ -137,6 +144,7 @@ footer {
 
 .grid {
     margin: 0;
+    margin-top: 75px; // Make room for nav
     padding: 0;
     list-style: none;
     position: relative;
@@ -164,6 +172,7 @@ footer {
 
       a > img {
         max-width: 100%;
+        @include transition (all 0.3s linear);
         // Fix images with different heights (This works!!!???)
 
       }
@@ -220,8 +229,15 @@ footer {
           font-size: 1.1em;
           font-weight: 300;
         }
+      }
 
-
+      a:hover > img {
+        -webkit-filter: blur(5px);
+        -moz-filter: blur(5px);
+        -ms-filter: blur(5px);
+        -o-filter: blur(5px);
+        filter: blur(5px);
+        @include transition (all 0.3s linear);
       }
 
       a:hover > div {
@@ -232,6 +248,26 @@ footer {
           @include animation-duration(0.5s);
         }
       }
+  }
+
+  // ng-animate
+  .ng-leave ul.grid, .ng-leave.ng-leave-active ul.grid{
+    border: 8px solid red;
+    @include animation-name(growOut);
+    @include animation-duration(0.5s);
+    //@include animation-direction(reverse);
+  }
+
+  li.ng-leave, li.ng-leave.ng-leave-active {
+    @include animation-name(growOut);
+    @include animation-duration(0.3s);
+    //@include animation-direction(reverse);
+  }
+
+  li.ng-enter, li.ng-enter.ng-enter-active {
+    //border: 8px solid blue;
+    @include animation-name(growIn);
+    //@include animation-direction(reverse);
   }
 }
 
@@ -264,29 +300,123 @@ footer {
 }
 
 @media screen and (max-width: 660px) {
+
+  nav {
+    height: 130px;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    text-align: center;
+
+    .form-control {
+      margin-top: 30px;
+    }
+  }
+
   .grid {
+
+    margin-top: 130px;
+
     li {
       width: 33.333333%; // Fallback
       width: -webkit-calc(100% / 3);
       width: calc(100% / 3);
     }
   }
+
+  footer {
+    p {
+      width: 100%;
+      padding: 0 40px;
+    }
+  }
 }
 
 @media screen and (max-width: 400px) {
+  nav {
+    height: 130px;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    text-align: center;
+
+    .form-control {
+      margin-top: 30px;
+    }
+  }
+
   .grid {
+
+    margin-top: 130px;
+
     li {
       width: 50%; // Fallback
       width: -webkit-calc(100% / 2);
       width: calc(100% / 2);
     }
   }
+
+  footer {
+    p {
+      width: 100%;
+      padding: 0 40px;
+    }
+  }
 }
 
 @media screen and (max-width: 300px) {
+   nav {
+    height: 130px;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    text-align: center;
+
+    .form-control {
+      margin-top: 30px;
+    }
+  }
+
   .grid {
+
+    margin-top: 130px;
+
     li {
       width: 100%;
+    }
+  }
+
+  footer {
+    p {
+      width: 100%;
+      padding: 0 40px;
     }
   }
 }
@@ -317,20 +447,40 @@ footer {
   }
 }
 
+@-webkit-keyframes growOut {
+  from {
+    @include transform(scale(1.0));
+  }
+
+  to {
+    @include transform(scale(0.0));
+  }
+}
+
+@keyframes growOut {
+  from {
+    @include transform(scale(1.0));
+  }
+
+  to {
+    @include transform(scale(0.0));
+  }
+}
+
 // Animation delay timings - for random entrance
 
 .delay-20ms {
-  @include animation-delay(0.2s);
+  @include animation-delay(0.1s);
 }
 
 .delay-30ms {
-  @include animation-delay(0.4s);
+  @include animation-delay(0.3s);
 }
 
 .delay-40ms {
-  @include animation-delay(0.4s);
+  @include animation-delay(0.5s);
 }
 
 .delay-50ms {
-  @include animation-delay(0.5s);
+  @include animation-delay(0.7s);
 }

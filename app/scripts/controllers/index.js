@@ -18,6 +18,10 @@ angular.module('Movies.system').controller('IndexCtrl', ['$scope', '$http', '$lo
       return ( '/' + view ) === $location.path();
     };
 
+    $scope.clearMovies = function () {
+      $scope.movies = [];
+    }
+
     $scope.getInTheaters = function () {
       $http.jsonp('http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?apikey=hj3r7yx59y8j6z6wvrv3r65a&limit=20&callback=JSON_CALLBACK').
         success(function(data, status, headers, config) {
