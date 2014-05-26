@@ -4,8 +4,8 @@
 angular.module('Movies').config(['$routeProvider',
     function($routeProvider) {
         $routeProvider.
-        when('/theaters', {
-            templateUrl: '../views/theaters.html'
+        when('/playing', {
+            templateUrl: '../views/playing.html'
         }).
         when('/opening', {
             templateUrl: '../views/opening.html'
@@ -14,7 +14,7 @@ angular.module('Movies').config(['$routeProvider',
             templateUrl: '../views/upcoming.html'
         }).
         otherwise({
-            redirectTo: '/theaters'
+            redirectTo: '/playing'
         });
     }
 ]);

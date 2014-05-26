@@ -11,10 +11,10 @@
         <!-- bower:css -->
         <link rel="stylesheet" href="bower_components/normalize.css/normalize.css" />
         <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
-        <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
         <!-- endbower -->
         <!-- endbuild -->
         <link rel="stylesheet" href="styles/bootstrap_custom/css/bootstrap.min.css">
+        <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.min.css">
         <!-- build:css styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
@@ -35,7 +35,7 @@
         <div class="wrapper">
             <nav class="animated slideInDown">
                 <div class="btn-group">
-                    <a href="#!/theaters" class="btn btn-default" ng-click="clearMovies()" ng-class='{ active: isActive("theaters")}'>In Theaters</a>
+                    <a href="#!/playing" class="btn btn-default" ng-click="clearMovies()" ng-class='{ active: isActive("playing")}'>Playing</a>
                     <a href="#!/opening" class="btn btn-default" ng-click="clearMovies()" ng-class='{ active: isActive("opening")}'>Opening</a>
                     <a href="#!/upcoming" class="btn btn-default" ng-click="clearMovies()" ng-class='{ active: isActive("upcoming")}'>Upcoming</a>
                 </div>
@@ -74,6 +74,8 @@
         <script src="bower_components/angular-resource/angular-resource.js"></script>
         <script src="bower_components/angular-animate/angular-animate.js"></script>
         <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="bower_components/moment/moment.js"></script>
+        <script src="bower_components/angular-moment/angular-moment.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
@@ -87,8 +89,8 @@
         <!-- Application Directives -->
         <script src="scripts/directives/ngRandomClass.js"></script>
         <script src="scripts/directives/ratometer.js"></script>
-        <script src="scripts/directives/max-height.js"></script>
         <script src="scripts/directives/image-preload.js"></script>
+        <script src="scripts/directives/timer.js"></script>
         <!-- Application Services -->
         <script src="scripts/services/global.js"></script>
         <!-- Application Controllers -->

@@ -13,6 +13,10 @@ angular.module('Movies.system').controller('IndexCtrl', ['$scope', '$http', '$lo
       'delay-50ms'
     ];
 
+     $scope.$broadcast('timer-stop');
+    $scope.timerRunning = false;
+
+
     // Highlight current tab
     $scope.isActive = function (view) {
       return ( '/' + view ) === $location.path();
@@ -22,7 +26,7 @@ angular.module('Movies.system').controller('IndexCtrl', ['$scope', '$http', '$lo
       $scope.movies = [];
     }
 
-    $scope.getInTheaters = function () {
+    $scope.getPlaying = function () {
       $http.jsonp('http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?apikey=hj3r7yx59y8j6z6wvrv3r65a&limit=20&callback=JSON_CALLBACK').
         success(function(data, status, headers, config) {
           // this callback will be called asynchronously
