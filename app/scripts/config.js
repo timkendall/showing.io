@@ -13,6 +13,9 @@ angular.module('Movies').config(['$routeProvider',
         when('/upcoming', {
             templateUrl: '../views/upcoming.html'
         }).
+        when('/:id', {
+            templateUrl: '../views/movie.html'
+        }).
         otherwise({
             redirectTo: '/playing'
         });

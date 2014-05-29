@@ -4,6 +4,7 @@ angular.module('Movies.system').controller('IndexCtrl', ['$scope', '$http', '$lo
     $scope.global = Global;
 
     $scope.movies = [];
+    $scope.current = null;
 
     // List classes for random delays
     $scope.classes = [
@@ -33,6 +34,7 @@ angular.module('Movies.system').controller('IndexCtrl', ['$scope', '$http', '$lo
           // when the response is available
 
           $scope.movies = data.movies;
+          $scope.current = data.movies[0];
 
         }).
         error(function(data, status, headers, config) {

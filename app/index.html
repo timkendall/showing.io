@@ -11,12 +11,14 @@
         <!-- bower:css -->
         <link rel="stylesheet" href="bower_components/normalize.css/normalize.css" />
         <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
+        <link rel="stylesheet" href="bower_components/molten/molten.css" />
         <!-- endbower -->
         <!-- endbuild -->
         <link rel="stylesheet" href="styles/bootstrap_custom/css/bootstrap.min.css">
         <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.min.css">
         <!-- build:css styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="styles/movie.css">
         <!-- endbuild -->
 
         <!-- build:js scripts/vendor/modernizr.js -->
@@ -32,31 +34,115 @@
         <!--<div class="about animated slideInDown">
             <h3>crafted by <a href="http://timkendall.com">Tim Kendall</a> <i class="fa fa-star"></i> <b>about</b></h3>
         </div>-->
-        <div class="wrapper">
-            <nav class="animated slideInDown">
-                <div class="btn-group">
-                    <a href="#!/playing" class="btn btn-default" ng-click="clearMovies()" ng-class='{ active: isActive("playing")}'>Playing</a>
-                    <a href="#!/opening" class="btn btn-default" ng-click="clearMovies()" ng-class='{ active: isActive("opening")}'>Opening</a>
-                    <a href="#!/upcoming" class="btn btn-default" ng-click="clearMovies()" ng-class='{ active: isActive("upcoming")}'>Upcoming</a>
-                </div>
+        <div class="detailed" style="display:none">
 
-                <input type="text" class="form-control" placeholder="Search movies" ng-model="search">
+          <div class="upper">
 
-                <div class="clearfix"></div>
-            </nav>
+            <h1>Title</h1>
+            <small>2011</small>
 
-            <div ng-view>
-            </div>
+            <p>Synopsis...</p>
+
+            <h3>Cast</h3>
+            <h4>Andy Sandberg "George", Rick Nar "Tom"</h4>
+
+
+            <h3>Trailers</h3>
+            <ul>
+              <li><a href="">Trailer 1</a></li>
+              <li><a href="">Trailer 2</a></li>
+              <li><a href="">Trailer 3</a></li>
+            </ul>
+          </div>
+
+          <div class="lower" >
+
+          </div>
         </div>
 
-        <footer>
-            <h3>crafted by <a href="http://timkendall.com">Tim Kendall</a>
-            <br />
-            <i class="fa fa-star"></i>
-            </h3>
+        <div class="grid rows split200 bottom">
 
-            <p>Movies is a site created for those who want to quickly see what movies are playing/opening/upcoming without wading through ads on the big sites. The movie ratings represent Rotten Tomatoe's user reviews because those are the ones that matter. Shoot me a message <a href="https://twitter.com/TboyTim">@tboytim</a> if you have any suggestions. <br /><b>-Tim</b></p>
-        </footer>
+          <footer class="bar animated fadeInUpBig">
+            <div class="open">
+                <i class="fa fa-sliders"></i>
+            </div>
+
+            <div class="close">
+                <i class="fa fa-times"></i>
+            </div>
+
+            <div class="control-group">
+             <h4 class="push">Genre</h4>
+                <div class="custom-select">
+                    <select>
+                        <option value="any">Any</option>
+                        <option value="saab">Saab</option>
+                        <option value="mercedes">Mercedes</option>
+                        <option value="audi">Audi</option>
+                      </select>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                <h4 class="push">Length</h4>
+                <div class="custom-select">
+                <select>
+                    <option value="any">Any</option>
+                    <option value="saab">Saab</option>
+                    <option value="mercedes">Mercedes</option>
+                    <option value="audi">Audi</option>
+                  </select>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                <h4>Order by</h4>
+                <div class="switch-container">
+                    <div class="switch white">
+
+                        <input type="radio" name="switch" id="switch-off">
+                        <input type="radio" name="switch" id="switch-on" checked>
+
+                        <label for="switch-off">Rating</label>
+                        <label for="switch-on">Release</label>
+
+                        <span class="toggle"></span>
+
+                    </div> <!-- end switch -->
+                </div>
+            </div>
+          </footer>
+
+          <!-- start inner grid -->
+          <div class="content">
+            <!-- the content (fluid) -->
+            <div class="grid rows split50">
+                <nav class="bar animated slideInDown">
+                    <!-- top bar (70px) -->
+                    <div class="btn-group">
+                        <a href="#!/playing" class="btn btn-default" ng-click="clearMovies()" ng-class='{ active: isActive("playing")}'>Playing</a>
+                        <a href="#!/opening" class="btn btn-default" ng-click="clearMovies()" ng-class='{ active: isActive("opening")}'>Opening</a>
+                        <a href="#!/upcoming" class="btn btn-default" ng-click="clearMovies()" ng-class='{ active: isActive("upcoming")}'>Upcoming</a>
+                    </div>
+
+
+                    <input type="text" class="form-control" placeholder="Search movies" ng-model="search">
+
+                    <div class="search">
+                        <i class="fa fa-search"></i>
+                    </div>
+                    <div class="clearfix"></div>
+                </nav>
+
+                <div class="content">
+                    <!-- the content (fluid) -->
+                    <div ng-view>
+                    </div>
+                </div>
+
+            </div> <!-- end inner grid-->
+          </div>
+        </div> <!-- end grid -->
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
@@ -76,8 +162,10 @@
         <script src="bower_components/angular-route/angular-route.js"></script>
         <script src="bower_components/moment/moment.js"></script>
         <script src="bower_components/angular-moment/angular-moment.js"></script>
+        <script src="bower_components/angular-timer/dist/angular-timer.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
+
 
         <!-- build:js scripts/main.js -->
 
@@ -97,5 +185,6 @@
         <script src="scripts/controllers/index.js"></script>
 
         <script src="scripts/init.js"></script>
+
 </body>
 </html>

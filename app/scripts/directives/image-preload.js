@@ -7,16 +7,25 @@ angular.module('Movies').directive('imgPreload', ['$rootScope', function($rootSc
         ngSrc: '@'
       },
       link: function(scope, elem, attrs) {
-        elem.css('opacity', '0');
+        // Show loading
+        elem.parent().parent().addClass('loading');
+
+        elem.parent().css('opacity', '0');
 
         // Assign a random delay
-        elem.on('load', function() {
-            elem.css('opacity', '1');
-            elem.addClass(scope.ngClasses[Math.floor(Math.random() * (scope.ngClasses.length))]);
-            elem.addClass('animated growIn');
+        elem.on('load', function () {
+            elem.parent().css('opacity', '1');
+            elem.parent().addClass(scope.ngClasses[Math.floor(Math.random() * (scope.ngClasses.length))]);
+            elem.parent().addClass('animated flipInY');
+            elem.parent().parent().removeClass('loading');
+
+            //var image = new Image;
+            //image.src = attrs.ngSrc;
+
+            // Get dominant color
         });
 
-        1elem.on('error', function() {
+        elem.on('error', function() {
           //
           console.log('image error');
         });
