@@ -1,11 +1,11 @@
 <ul class="movieGrid" ng-init="getPlaying()">
     <li ng-repeat="movie in movies | orderBy:'-release_dates.theater' | filter:search">
-        <a ng-href="{{movie.links.alternate}}" target="_blank">
+        <a ng-click="openModal(movie.id)">
             <img ng-src="{{movie.posters.original}}" img-preload ng-classes="classes" />
             <div>
                 <h3 class="animated fadeInUp">{{movie.title}}</h3>
                 <h3>
-                    <i class="fa fa-heart rating" ratometer="{{movie.ratings.audience_score}}"></i> <br />
+                    <i class="fa fa-heart rating" ratometer="{{current.ratings.audience_score}}"></i> <br />
                     <timer class="percent" count="{{movie.ratings.audience_score}}" time="50"></timer>
                 </h3>
             </div>

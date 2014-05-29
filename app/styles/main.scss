@@ -28,6 +28,10 @@ body {
     padding: 0.2em 0;
 }
 
+.grid {
+  @include transition (all 0.3s ease-in-out);
+}
+
 nav {
   z-index: 9;
   border-bottom: 1px solid #1a1a1a;
@@ -73,6 +77,10 @@ nav {
     background: darken(#2F343A, 5%);
   }
 
+  .form-control {
+    font-weight: 100;
+  }
+
   .form-control:focus {
     width: 250px;
     background: $purple;
@@ -98,28 +106,33 @@ nav {
 
   .btn-default {
     padding-top: 0;
+    //margin-right: 1px;
     height: 50px;
-    font-weight: 300;
+    font-weight: 100;
     line-height: 50px;
-    background: none;
+    background: darken(#2F343A, 10%);
     border: none;
     border-radius: 0%;
-    border-right: 1px solid;
-    border-color: lighten(#1a1a1a, 30%);
+    //border-right: 1px solid lighten(#2F343A, 30%);
     box-shadow: none;
     color: lighten(#1a1a1a, 70%);
     @include transition (all 0.3s ease-in-out);
   }
 
+  .btn-default + .btn-default.active {
+    border-right: none;
+  }
+
   .btn-default.active, .btn-default:hover {
     background: $red;
-    border-color: $red;
+    border: none;
     box-shadow: none;
     color: #fff;
   }
 
   .btn-default:last-child {
     @include border-right-radius(99px);
+    border-right: none;
   }
 }
 
@@ -134,6 +147,8 @@ nav {
 
 .split80 .open {
   display: block;
+  @include animation-name(fadeIn);
+  @include animation-duration(1s);
 }
 
 .split80 > footer {
@@ -152,6 +167,7 @@ footer {
   background: $purple;
   margin: 0;
   padding: 0 20px;
+  z-index: 99;
   display: -webkit-flex;
    display: flex;
    -webkit-flex-direction: row; /* works with row or column */
@@ -167,6 +183,8 @@ footer {
     display: none;
     font-size: 18px;
     color: white;
+    width: 100%;
+    text-align: center;
   }
 
   .close {
@@ -187,8 +205,9 @@ footer {
   // Custom form elements
   .control-group {
     position: relative; // for aligning select chevrons
-
     margin-right: 65px;
+    @include animation-name(fadeIn);
+    @include animation-duration(1s);
 
     h4 {
       font-size: 11px;
@@ -432,6 +451,27 @@ footer {
   }
 }
 
+// Ratings fill
+i.rating {
+          font-size: 1.6em;
+          background-clip: text;
+          text-fill-color: transparent;
+          text-stroke-width: 2px;
+          text-stroke-color: rgba(213,43,25,1);
+          -moz-text-fill-color: transparent;
+          -moz-text-stroke-width: 2px;
+          -moz-text-stroke-color: rgba(213,43,25,1);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          -webkit-text-stroke-width: 2px;
+          -webkit-text-stroke-color: rgba(213,43,25,1);
+          background-repeat: repeat;
+          background-size: 100% 500%;
+          @include transition (background 0.5s linear);
+          @include animation-name(flipOutY);
+          @include animation-duration(0.5s);
+}
+
 .movieGrid {
     margin: 0;
     padding: 0;
@@ -542,30 +582,9 @@ footer {
           @include animation-duration(0.5s);
         }
 
-        // Ratings fill
-        i.rating {
-          font-size: 1.6em;
-          background-clip: text;
-          text-fill-color: transparent;
-          text-stroke-width: 2px;
-          text-stroke-color: rgba(213,43,25,1);
-          -moz-text-fill-color: transparent;
-          -moz-text-stroke-width: 2px;
-          -moz-text-stroke-color: rgba(213,43,25,1);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          -webkit-text-stroke-width: 2px;
-          -webkit-text-stroke-color: rgba(213,43,25,1);
-          background-repeat: repeat;
-          background-size: 100% 500%;
-          @include transition (background 0.5s linear);
-          @include animation-name(flipOutY);
-          @include animation-duration(0.5s);
-        }
-
         .percent {
           font-size: 0.8em;
-          font-weight: 300;
+          font-weight: 100;
           margin-left: -4px;
         }
       }

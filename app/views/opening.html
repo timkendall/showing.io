@@ -1,6 +1,6 @@
 <ul class="movieGrid" ng-init="getOpening()">
            <li ng-repeat="movie in movies | orderBy:'-ratings.audience_score' | filter:search">
-            <a ng-href="{{movie.links.alternate}}" target="_blank"><img ng-src="{{movie.posters.original}}" img-preload class="" ng-classes="classes" />
+            <a ng-click="openModal(movie.id)"><img ng-src="{{movie.posters.original}}" img-preload class="" ng-classes="classes" />
                 <div>
                     <h3 class="animated fadeInUp">{{movie.title}}</h3>
                     <h3>

@@ -34,40 +34,66 @@
         <!--<div class="about animated slideInDown">
             <h3>crafted by <a href="http://timkendall.com">Tim Kendall</a> <i class="fa fa-star"></i> <b>about</b></h3>
         </div>-->
-        <div class="detailed" style="display:none">
+        <div class="detailed" style="display:none" modal>
+            <div class="close" ng-click="closeModal()" w-mousetrap="{esc: closeModal}">
+                <i class="fa fa-times"></i>
+            </div>
 
-          <div class="upper">
+            <div class="left">
 
-            <h1>Title</h1>
-            <small>2011</small>
+            <h1>{{current.title}}
+            </h1>
+            <small>{{current.year}}</small>
 
-            <p>Synopsis...</p>
+            <p>{{current.synopsis}}</p>
 
             <h3>Cast</h3>
-            <h4>Andy Sandberg "George", Rick Nar "Tom"</h4>
+            <h4>
+                <span ng-repeat="member in current.abridged_cast">{{member.name}} <span>"{{member.characters[0]}}"</span>, </span>
+            </h4>
 
 
             <h3>Trailers</h3>
+                <!-- Show a little loader-->
+                <div class="loading" ng-show="!current.trailers.clips"></div>
+                <h4 ng-show="!current.trailers.clips.length">Sorry, no trailers.</h4>
+
+                <ul>
+                    <li ng-repeat="trailer in current.trailers.clips">
+                        <a ng-href="{{trailer.links.alternate}}" target="_blank">
+                            {{trailer.title}}
+                            <time>{{trailer.duration}}</time>
+                        </a>
+                    </li>
+                </ul>
             <ul>
-              <li><a href="">Trailer 1</a></li>
-              <li><a href="">Trailer 2</a></li>
-              <li><a href="">Trailer 3</a></li>
+
             </ul>
-          </div>
+            </div>
+            <div class="right">
+                <div class="poster">
+                    <img ng-src="{{current.posters.original}}" />
+                    <div>
+                        <h3>
+                            <i class="fa fa-heart rating" ratometer="{{movie.ratings.audience_score}}"></i> <br />
+                            <div class="percent">{{current.ratings.audience_score}}</div>
+                        </h3>
+                    </div>
+                </div>
+            </div>
 
-          <div class="lower" >
 
-          </div>
+
         </div>
 
-        <div class="grid rows split200 bottom">
+        <div class="grid rows split80 bottom">
 
-          <footer class="bar animated fadeInUpBig">
-            <div class="open">
+          <footer class="bar animated fadeInUpBig" menu>
+            <div class="open" ng-click="openMenu()" w-mousetrap="{o: openMenu, up: openMenu}">
                 <i class="fa fa-sliders"></i>
             </div>
 
-            <div class="close">
+            <div class="close" ng-click="closeMenu()" w-mousetrap="{down: closeMenu}">
                 <i class="fa fa-times"></i>
             </div>
 
@@ -163,6 +189,8 @@
         <script src="bower_components/moment/moment.js"></script>
         <script src="bower_components/angular-moment/angular-moment.js"></script>
         <script src="bower_components/angular-timer/dist/angular-timer.js"></script>
+        <script src="bower_components/mgo-mousetrap/mousetrap.js"></script>
+        <script src="bower_components/mgo-mousetrap/wMousetrap.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
@@ -179,6 +207,8 @@
         <script src="scripts/directives/ratometer.js"></script>
         <script src="scripts/directives/image-preload.js"></script>
         <script src="scripts/directives/timer.js"></script>
+        <script src="scripts/directives/menu.js"></script>
+        <script src="scripts/directives/modal.js"></script>
         <!-- Application Services -->
         <script src="scripts/services/global.js"></script>
         <!-- Application Controllers -->
