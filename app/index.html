@@ -11,12 +11,15 @@
         <!-- bower:css -->
         <link rel="stylesheet" href="bower_components/normalize.css/normalize.css" />
         <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
+        <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
+        <link rel="stylesheet" href="bower_components/molten/molten.css" />
         <!-- endbower -->
         <!-- endbuild -->
         <link rel="stylesheet" href="styles/bootstrap_custom/css/bootstrap.min.css">
         <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.min.css">
         <!-- build:css styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="styles/movie.css">
         <!-- endbuild -->
 
         <!-- build:js scripts/vendor/modernizr.js -->
@@ -32,31 +35,140 @@
         <!--<div class="about animated slideInDown">
             <h3>crafted by <a href="http://timkendall.com">Tim Kendall</a> <i class="fa fa-star"></i> <b>about</b></h3>
         </div>-->
-        <div class="wrapper">
-            <nav class="animated slideInDown">
-                <div class="btn-group">
-                    <a href="#!/playing" class="btn btn-default" ng-click="clearMovies()" ng-class='{ active: isActive("playing")}'>Playing</a>
-                    <a href="#!/opening" class="btn btn-default" ng-click="clearMovies()" ng-class='{ active: isActive("opening")}'>Opening</a>
-                    <a href="#!/upcoming" class="btn btn-default" ng-click="clearMovies()" ng-class='{ active: isActive("upcoming")}'>Upcoming</a>
+
+        <!-- Start Modal (should put this in seprate file) -->
+        <div class="detailed" style="display:none" modal>
+            <div class="close" ng-click="closeModal()" w-mousetrap="{esc: closeModal}">
+                <i class="fa fa-times"></i>
+            </div>
+
+            <div class="left">
+
+            <h1>{{current.title}}
+            </h1>
+            <small>{{current.year}} - {{current.mpaa_rating}}</small>
+
+            <p>{{current.synopsis | words:current.textLength}} <a read-more ng-click="changeLength(current)">Show more</a></p>
+
+            <h3>Cast</h3>
+            <h4>
+                <span ng-repeat="member in current.abridged_cast">{{member.name}} <span>"{{member.characters[0]}}"</span>, </span>
+            </h4>
+
+
+            <h3>Trailers</h3>
+                <!-- Show a little loader-->
+                <div class="loading" ng-show="!current.trailers.clips"></div>
+
+                <ul>
+                    <li ng-repeat="trailer in current.trailers.clips">
+                        <a ng-href="{{trailer.links.alternate}}" target="_blank">
+                            {{trailer.title}}
+                            <time>{{trailer.duration}}</time>
+                        </a>
+                    </li>
+                </ul>
+            <ul>
+
+            </ul>
+            </div>
+            <div class="right">
+                <div class="poster">
+                    <img ng-src="{{current.posters.original}}" />
+                    <div>
+                        <h3>
+                            <i class="fa fa-heart rating" ratometer="{{movie.ratings.audience_score}}"></i> <br />
+                            <div class="percent">{{current.ratings.audience_score}}</div>
+                        </h3>
+                    </div>
                 </div>
-
-                <input type="text" class="form-control" placeholder="Search movies" ng-model="search">
-
-                <div class="clearfix"></div>
-            </nav>
-
-            <div ng-view>
             </div>
         </div>
+        <!-- end modal -->
 
-        <footer>
-            <h3>crafted by <a href="http://timkendall.com">Tim Kendall</a>
-            <br />
-            <i class="fa fa-star"></i>
-            </h3>
+        <!-- Start Main -->
+        <div class="grid rows split80 bottom">
 
-            <p>Movies is a site created for those who want to quickly see what movies are playing/opening/upcoming without wading through ads on the big sites. The movie ratings represent Rotten Tomatoe's user reviews because those are the ones that matter. Shoot me a message <a href="https://twitter.com/TboyTim">@tboytim</a> if you have any suggestions. <br /><b>-Tim</b></p>
-        </footer>
+          <footer class="bar animated fadeInUpBig" menu>
+            <div class="open" ng-click="openMenu()" w-mousetrap="{o: openMenu, up: openMenu}">
+                <i class="fa fa-sliders"></i>
+            </div>
+
+            <div class="close" ng-click="closeMenu()" w-mousetrap="{down: closeMenu}">
+                <i class="fa fa-times"></i>
+            </div>
+
+            <div class="control-group">
+             <h4 class="push">Genre</h4>
+                <div class="custom-select">
+                    <select ng-model="genre.genres" ng-options="genre for genres in current">
+                        <option value="any">Any</option>
+
+                      </select>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                <h4 class="push">Rating</h4>
+                <div class="custom-select">
+                <select ng-model="rating.mpaa_rating">
+                    <option value="">Any</option>
+                    <option value="G">G</option>
+                    <option value="PG">PG</option>
+                    <option value="PG-13">PG-13</option>
+                    <option value="R">R</option>
+                  </select>
+                  </div>
+            </div>
+
+            <div class="control-group">
+                <h4>Order by</h4>
+                <div class="switch-container">
+                    <div class="switch white">
+
+                        <input type="radio" name="rating" id="switch-off" ng-model="order" value="-ratings.audience_score">
+                        <input type="radio" name="release" id="switch-on" ng-model="order" value="release_dates.theater">
+
+                        <label for="rating">Rating</label>
+                        <label for="release">Release</label>
+
+                        <span class="toggle"></span>
+
+                    </div> <!-- end switch -->
+                </div>
+            </div>
+          </footer>
+
+          <!-- start inner grid -->
+          <div class="content">
+            <!-- the content (fluid) -->
+            <div class="grid rows split50">
+                <nav class="bar animated slideInDown">
+                    <!-- top bar (70px) -->
+                    <div class="btn-group">
+                        <a href="#!/playing" class="btn btn-default" ng-click="clearMovies()" ng-class='{ active: isActive("playing")}'>Playing</a>
+                        <a href="#!/opening" class="btn btn-default" ng-click="clearMovies()" ng-class='{ active: isActive("opening")}'>Opening</a>
+                        <a href="#!/upcoming" class="btn btn-default" ng-click="clearMovies()" ng-class='{ active: isActive("upcoming")}'>Upcoming</a>
+                    </div>
+
+
+                    <input type="text" class="form-control" placeholder="Search movies" ng-model="search.title">
+
+                    <div class="search">
+                        <i class="fa fa-search"></i>
+                    </div>
+                    <div class="clearfix"></div>
+                </nav>
+
+                <div class="content">
+                    <!-- the content (fluid) -->
+                    <div ng-view>
+                    </div>
+                </div>
+
+            </div> <!-- end inner grid-->
+          </div>
+        </div> <!-- end grid -->
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
@@ -76,8 +188,13 @@
         <script src="bower_components/angular-route/angular-route.js"></script>
         <script src="bower_components/moment/moment.js"></script>
         <script src="bower_components/angular-moment/angular-moment.js"></script>
+        <script src="bower_components/angular-timer/dist/angular-timer.js"></script>
+        <script src="bower_components/mousetrap/mousetrap.js"></script>
+        <script src="bower_components/mgo-mousetrap/wMousetrap.js"></script>
+        <script src="bower_components/angular-truncate/dist/angular-truncate.min.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
+
 
         <!-- build:js scripts/main.js -->
 
@@ -91,11 +208,16 @@
         <script src="scripts/directives/ratometer.js"></script>
         <script src="scripts/directives/image-preload.js"></script>
         <script src="scripts/directives/timer.js"></script>
+        <script src="scripts/directives/menu.js"></script>
+        <script src="scripts/directives/modal.js"></script>
+        <script src="scripts/directives/read-more.js"></script>
         <!-- Application Services -->
         <script src="scripts/services/global.js"></script>
         <!-- Application Controllers -->
         <script src="scripts/controllers/index.js"></script>
 
         <script src="scripts/init.js"></script>
+
+
 </body>
 </html>
