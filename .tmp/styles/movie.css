@@ -1,0 +1,198 @@
+.blured {
+  webkit-filter: blur(60px);
+  -moz-filter: blur(20px);
+  -ms-filter: blur(20px);
+  -o-filter: blur(20px);
+  -webkit-filter: blur(30px);
+  filter: blur(30px);
+  transition: all 0.3s ease-in-out;
+}
+
+.detailed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  padding: 5vw;
+  z-index: 999;
+  background: none;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: radial-gradient(  circle at 80% 50%, rgba(0, 0, 0, 0) 10%, black 100%);
+}
+.detailed .close {
+  color: #fff;
+  text-shadow: none;
+  opacity: 0.6;
+  transition: all 0.2s ease-in-out;
+}
+.detailed .close:hover {
+  opacity: 1;
+}
+.detailed h1 {
+  color: #fff;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 28px;
+}
+.detailed h1 .score {
+  display: inline;
+  float: right;
+  font-size: 18px;
+  text-align: center;
+}
+.detailed h1 .score .percent {
+  font-size: 12px;
+}
+.detailed h3 {
+  font-size: 14px;
+  color: #fff;
+  font-weight: 400;
+}
+.detailed h4 {
+  font-size: 12px;
+  color: #fff;
+  font-weight: 300;
+}
+.detailed h4 span > span {
+  font-weight: 100;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 0 2px;
+}
+.detailed p {
+  color: #fff;
+  font-weight: 100;
+}
+.detailed small {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.left {
+  float: left;
+  width: 50%;
+  height: 100%;
+  background: none;
+  overflow: scroll;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-delay: 0.3s;
+  animation-delay: 0.3s;
+}
+.left ul {
+  padding: 0;
+}
+.left ul li:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+.left ul li {
+  list-style: none;
+  padding: 0 8px;
+  margin: 6px 0;
+  line-height: 32px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+}
+.left ul li a {
+  display: block;
+  font-size: 12px;
+  text-decoration: none;
+  color: white;
+  font-weight: 100;
+}
+.left ul li time {
+  float: right;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.right {
+  float: left;
+  width: 50%;
+  height: 100%;
+  background: none;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  /* works with row or column */
+  flex-direction: row;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.right .poster {
+  position: relative;
+  width: calc(100% / 2);
+  border: 2px solid #f5e117;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  box-shadow: 0px 0px 3px #000;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-delay: 0.5s;
+  animation-delay: 0.5s;
+}
+.right .poster div {
+  border: 1px solid red;
+  position: absolute;
+  padding: 0 20px;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: radial-gradient(  rgba(0, 0, 0, 0), black);
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  opacity: 0;
+  border: 2px solid #f5e117;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  transition: opacity 0.3s ease-in-out;
+}
+.right .poster div h3 {
+  width: 100%;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1.4em;
+  letter-spacing: 2px;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  -webkit-animation-name: flipOutY;
+  animation-name: flipOutY;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+}
+.right img {
+  width: 100%;
+  display: block;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
