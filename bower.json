@@ -13,7 +13,8 @@
     "angular-moment": "~0.7.1",
     "angular-timer": "~1.1.3",
     "molten": "~0.4.2",
-    "mgo-mousetrap": "https://github.com/mgonto/mgo-mousetrap.git"
+    "mgo-mousetrap": "https://github.com/mgonto/mgo-mousetrap.git",
+    "angular-truncate": "*"
   },
   "devDependencies": {}
 }

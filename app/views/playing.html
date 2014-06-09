@@ -1,5 +1,5 @@
 <ul class="movieGrid" ng-init="getPlaying()">
-    <li ng-repeat="movie in movies | orderBy:'-release_dates.theater' | filter:search">
+    <li ng-repeat="movie in movies | orderBy:order | filter:rating | filter:search">
         <a ng-click="openModal(movie.id)">
             <img ng-src="{{movie.posters.original}}" img-preload ng-classes="classes" />
             <div>

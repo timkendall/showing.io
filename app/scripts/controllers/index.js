@@ -4,7 +4,9 @@ angular.module('Movies.system').controller('IndexCtrl', ['$scope', '$http', '$lo
     $scope.global = Global;
 
     $scope.movies = [];
-    $scope.current = null;
+    $scope.current = {};
+
+    $scope.order = 'release_dates.theater';
 
     // List classes for random delays
     $scope.classes = [
@@ -14,6 +16,11 @@ angular.module('Movies.system').controller('IndexCtrl', ['$scope', '$http', '$lo
       'delay-50ms'
     ];
 
+    $scope.changeLength = function (synopsis) {
+        $scope.$broadcast('truncating-text');
+        synopsis.textLength = 9999;
+    }
+
     $scope.getTrailers = function (id) {
       console.log('getting links')
       $http.jsonp('http://api.rottentomatoes.com/api/public/v1.0/movies/' + id + '/clips.json?apikey=hj3r7yx59y8j6z6wvrv3r65a&limit=20&callback=JSON_CALLBACK').
@@ -22,13 +29,11 @@ angular.module('Movies.system').controller('IndexCtrl', ['$scope', '$http', '$lo
           // when the response is available
 
           $scope.current.trailers = data;
-          console.log($scope.current.trailers)
-
         }).
         error(function(data, status, headers, config) {
           // called asynchronously if an error occurs
           // or server returns response with an error status.
-          console.log(data)
+
         });
     }
 
@@ -63,6 +68,7 @@ angular.module('Movies.system').controller('IndexCtrl', ['$scope', '$http', '$lo
       for (var i = 0; i < $scope.movies.length; ++i) {
         if ($scope.movies[i].id === id) {
           $scope.current = $scope.movies[i];
+          $scope.current.textLength = 60;
 
           $scope.getTrailers($scope.current.id);
           break;
