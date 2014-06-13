@@ -2,7 +2,7 @@
 <html class="no-js">
     <head>
         <meta charset="utf-8">
-        <title>BoxOffice.io - Movies in theaters</title>
+        <title>Showing.io - Movies in theaters</title>
         <meta name="description" content="BoxOffice.io - Movies in theaters">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -142,7 +142,7 @@
           <!-- start inner grid -->
           <div class="content">
             <!-- the content (fluid) -->
-            <div class="grid rows split50">
+            <div class="grid rows split50 view">
                 <nav class="bar animated slideInDown">
                     <!-- top bar (70px) -->
                     <div class="btn-group">
@@ -151,16 +151,22 @@
                         <a href="#!/upcoming" class="btn btn-default" ng-click="clearMovies()" ng-class='{ active: isActive("upcoming")}'>Upcoming</a>
                     </div>
 
+                    <a href="http://twitter.com/home?status=http://showing.io/%20is%20a%20simple%20webapp%20for%20seeing%20what%20movies%20are%20playing%20via%20@tboytim" class="twitter" target="_blank">
+                        <i class="fa fa-twitter fa-lg "></i>
+                        <div class="count">{{count}}</div>
+                    </a>
 
-                    <input type="text" class="form-control" placeholder="Search movies" ng-model="search.title">
+                    <div class="finder">
+                        <input type="text" class="form-control" placeholder="Search movies" ng-model="search.title">
 
-                    <div class="search">
-                        <i class="fa fa-search"></i>
+                        <div class="search">
+                            <i class="fa fa-search"></i>
+                        </div>
                     </div>
-                    <div class="clearfix"></div>
+
                 </nav>
 
-                <div class="content">
+                <div class="content view">
                     <!-- the content (fluid) -->
                     <div ng-view>
                     </div>

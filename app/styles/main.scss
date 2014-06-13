@@ -49,12 +49,72 @@ nav {
   border-bottom: 1px solid #1a1a1a;
   background: rgba(47, 52, 58, 0.8);
   overflow: hidden;
+  display: -webkit-flex;
+   display: flex;
+   -webkit-flex-direction: row; /* works with row or column */
+   flex-direction: row;
+   -webkit-align-items: center;
+   align-items: center;
+   -webkit-justify-content: center;
+   justify-content: center;
+
+  a.twitter {
+    display: block;
+    overflow: hidden;
+    text-align: center;
+    font-size: 14px;
+    margin: 0 auto;
+    color: #fff;
+    text-decoration: none;
+
+    background: #181B1E;
+    width: 40px;
+    height: 40px;
+    line-height: 45px;
+    @include border-left-radius(99px);
+    @include border-right-radius(99px);
+    @include transition (all 0.3s ease-in-out);
+
+    i {
+      //float: left;
+      display: inline;
+      line-height: 0px; // Why?
+    }
+
+    div.count {
+      display: none;
+      opacity: 0;
+
+    }
+
+  }
+
+  a.twitter:hover {
+    width: 80px;
+    background: #F01700;
+    cursor: pointer;
+    @include transition (all 0.3s ease-in-out);
+
+    div.icon > i {
+      text-align: left;
+    }
+
+    div.count {
+      opacity: 1;
+      display: inline;
+      @include animation-name(growIn);
+       @include animation-duration(0.3s);
+    }
+  }
+
+  .finder {
+    //float: right;
+    display: inline;
+  }
 
   .form-control {
     float: right;
-    position: relative;
-    top: 0;
-    right: 0;
+
     width: 200px;
     height: 50px;
     text-align: left;
@@ -79,6 +139,8 @@ nav {
     @include border-left-radius(99px);
     float: right;
     @include transition (all 0.3s ease-in-out);
+
+    margin-left: auto;
   }
 
   .search-outer {
@@ -111,9 +173,6 @@ nav {
 
   .btn-group {
     float: left;
-    position: relative;
-    top: 0;
-    left: 0;
     opacity: 1 !important;
     @include border-right-radius(99px);
   }
@@ -466,111 +525,126 @@ footer {
   }
 }
 
-// Ratings fill
+// Ratings fill (only works for webkit :( )
 i.rating {
-          font-size: 1.6em;
-          background-clip: text;
-          text-fill-color: transparent;
-          text-stroke-width: 2px;
-          text-stroke-color: rgba(213,43,25,1);
-          -moz-text-fill-color: transparent;
-          -moz-text-stroke-width: 2px;
-          -moz-text-stroke-color: rgba(213,43,25,1);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          -webkit-text-stroke-width: 2px;
-          -webkit-text-stroke-color: rgba(213,43,25,1);
-          background-repeat: repeat;
-          background-size: 100% 500%;
-          @include transition (background 0.5s linear);
-          @include animation-name(flipOutY);
-          @include animation-duration(0.5s);
+  font-size: 1.6em;
+  background-clip: text;
+  text-fill-color: transparent;
+  text-stroke-width: 2px;
+  text-stroke-color: rgba(213,43,25,1);
+  -moz-text-fill-color: transparent;
+  -moz-text-stroke-width: 2px;
+  -moz-text-stroke-color: rgba(213,43,25,1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: rgba(213,43,25,1);
+  background-repeat: repeat;
+  background-size: 100% 500%;
+  @include transition (background 0.5s linear);
+  @include animation-name(flipOutY);
+  @include animation-duration(0.5s);
+}
+
+// Add some extra padding
+.view {
+  padding-bottom: 20px !important;
 }
 
 .movieGrid {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+  width: 100%;
+
+  li:hover {
+    @include transform(translateY(-10px));
+  }
+
+  li {
     position: relative;
-    width: 100%;
-    z-index: 8;
+    float: left;
+    //overflow: hidden;
+    margin: 20px 0 0 20px;
 
-    li:first-child {
+    // Fluid widths
+    width: 16.6666667%; // Fallback
+    width: -webkit-calc((100% / 6) - 25px);
+    width: calc((100% / 6) - 25px);
 
+    // Ensure same heights (thanks to Galen Gidman)
+    height: 0;
+    padding-bottom: 22%;
+
+    //overflow: hidden; // Get kinda a cool effect without this
+    @include hardware-acceleration();
+    @include border-top-radius(5px);
+    @include border-bottom-radius(5px);
+    @include transition (all 0.3s ease-in-out);
+
+    a {
+      box-shadow: 0px 0px 3px #000; // Nice touch, not totally flat design
     }
 
-    li:hover {
-      @include transform(translateY(-10px));
-    }
-
-    li {
-      position: relative;
-      float: left;
-      //overflow: hidden;
-      margin: 20px 0 0 20px;
-      width: 16.6666667%; // Fallback
-      width: -webkit-calc((100% / 6) - 25px);
-      width: calc((100% / 6) - 25px);
-      max-height: 100%;
-      //overflow: hidden; // Get kinda a cool effect without this
-      @include hardware-acceleration();
+    a, a > .img {
+      //width: 100%;
+      cursor: pointer;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
       @include border-top-radius(5px);
       @include border-bottom-radius(5px);
-      @include transition (all 0.3s ease-in-out);
+    }
 
-      // Ensure same heights (even if different height images)
+    a > .img {
+      z-index: 8;
+      max-width: 100%;
+      @include transition (all 0.3s linear);
+    }
 
-      a {
-        box-shadow: 0px 0px 3px #000; // Nice touch, not totally flat design
-      }
+    a div.img {
+      opacity: 1 !important;
+      z-index: 7;
+    }
 
-      a, a > img {
-        display: block;
+    a div.details {
+      z-index: 8;
+      @include radial-gradient(rgba(0,0,0,0), rgba(0,0,0,1));
+    }
+
+
+    a  div {
+      position: absolute;
+      padding: 0 20px;
+      left: 0px;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flex;
+      display: flex;
+      flex-direction: column;
+      -webkit-flex-direction: column;
+      -webkit-align-items: center;
+      -moz-align-items: center;
+      -ms-align-items: center;
+      align-items: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+
+      opacity: 0; // Hide until hover!
+
+      @include border-top-radius(5px);
+      @include border-bottom-radius(5px);
+      @include transition (opacity 0.3s ease-in-out);
+
+      h3 {
         width: 100%;
-        cursor: pointer;
-        @include border-top-radius(5px);
-        @include border-bottom-radius(5px);
-      }
-
-      a > img {
-        z-index: 8;
-        max-width: 100%;
-        @include transition (all 0.3s linear);
-      }
-
-      a > div {
-        position: absolute;
-        padding: 0 20px;
-        left: 0px;
-        top: 0px;
-        right: 0px;
-        bottom: 0px;
-        //@include background-image(linear-gradient(transparent 0, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.7) 80%, rgba(0,0,0,1) 100%));
-        @include radial-gradient(rgba(0,0,0,0), rgba(0,0,0,1));
-        // background-blend-mode: overlay; Doesn't work over non-explicit background images
-        display: -webkit-flex;
-        display: -moz-flex;
-        display: -ms-flex;
-        display: flex;
-        flex-direction: column;
-        -webkit-flex-direction: column;
-        -webkit-align-items: center;
-        -moz-align-items: center;
-        -ms-align-items: center;
-        align-items: center;
-        -webkit-justify-content: center;
-        justify-content: center;
-        text-align: center;
-        cursor: pointer;
-
-        opacity: 0;
-        border: 2px solid $yellow;
-        @include border-top-radius(5px);
-        @include border-bottom-radius(5px);
-        @include transition (opacity 0.3s ease-in-out);
-
-        h3 {
-          width: 100%;
           color: #fff;
           text-transform: uppercase;
           font-size: 1.4em;
@@ -606,18 +680,23 @@ i.rating {
         }
       }
 
-      a:hover > img {
+      a:hover > .img {
         -webkit-filter: blur(20px) contrast(120%);
         -moz-filter: blur(20px) contrast(120%);
         -ms-filter: blur(20px) contrast(120%);
         -o-filter: blur(20px) contrast(120%);
         filter: blur(20px) contrast(120%);
+
+        //@include radial-gradient(rgba(0,0,0,0), rgba(0,0,0,1));
+        //background-blend-mode: overlay; // Doesn't work over non-explicit background images
+
         @include transition (all 0.3s linear);
-        @include hardware-acceleration();
+        //@include hardware-acceleration();
       }
 
       a:hover > div {
         opacity: 1;
+        border: 2px solid $yellow;
         @include transition (opacity 0.3s linear);
 
         h3 {
@@ -665,13 +744,14 @@ i.rating {
 }
 
 // Responsiveness - change number of items per row
-
 @media screen and (max-width: 1190px) {
   .movieGrid {
     li {
       width: 20%; // Fallback
       width: -webkit-calc((100% / 5) - 24px);
       width: calc((100% / 5) - 24px);
+
+      padding-bottom: 25%;
     }
   }
 }
@@ -682,6 +762,8 @@ i.rating {
       width: 25%; // Fallback
       width: -webkit-calc((100% / 4) - 25px);
       width: calc((100% / 4) - 25px);
+
+      padding-bottom: 32%;
 
       a > div > h3 {
         font-size: 1.4em;
@@ -705,6 +787,7 @@ i.rating {
       width: -webkit-calc((100% / 3) - 25px);
       width: calc((100% / 3) - 25px);
 
+      padding-bottom: 41%;
       a > div > h3 {
         font-size: 1.4em;
       }
@@ -719,6 +802,8 @@ i.rating {
       width: -webkit-calc((100% / 2) - 30px);
       width: calc((100% / 2) - 30px);
 
+      padding-bottom: 65%;
+
       a > div > h3 {
         font-size: 1.3em;
       }
@@ -731,6 +816,8 @@ i.rating {
     li {
       margin: 3%;
       width: 94%;
+
+      padding-bottom: 90%;
     }
   }
 }
@@ -789,5 +876,20 @@ i.rating {
       } 100% {
         transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
         -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+      }
+    }
+
+// Grow-in animation
+@-webkit-keyframes growIn {
+      0% { -webkit-transform: scale(0, 0) }
+      100% { -webkit-transform: scale(1, 1) }
+    }
+
+@keyframes growIn {
+      0% {
+       webkit-transform: scale(0, 0)
+      }
+       100% {
+        webkit-transform: scale(1, 1)
       }
     }
