@@ -10,29 +10,28 @@ angular.module('Movies').directive('imgPreload', ['$rootScope', function($rootSc
         // Show loading
         elem.parent().parent().addClass('loading');
 
-        elem.parent().css('opacity', '0');
+        // Generate a new image to watch
+        var bgImg = new Image(),
+          imageLocation = attrs.backgroundImage;
+          bgImg.src = imageLocation;
 
-        // Assign a random delay
-        elem.on('load', function () {
-            elem.parent().css('opacity', '1');
+        //elem.parent().css('opacity', '0');
+
+
+        bgImg.onload = function () {
+            // Assign a random delay for animation
             elem.parent().addClass(scope.ngClasses[Math.floor(Math.random() * (scope.ngClasses.length))]);
+
+            // Set loaded image as background
+            elem.css({'background-image': 'url(' + imageLocation +')'});
+            elem.parent().css('opacity', '1');
+
             elem.parent().addClass('animated flipInY');
             elem.parent().parent().removeClass('loading');
 
-            //var image = new Image;
-            //image.src = attrs.ngSrc;
-
             // Get dominant color
-        });
+        };
 
-        elem.on('error', function() {
-          //
-          console.log('image error');
-        });
-
-        scope.$watch('ngSrc', function(newVal) {
-          //element.removeClass('in');
-        });
       }
     };
 }]);

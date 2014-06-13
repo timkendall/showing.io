@@ -132,4 +132,15 @@ angular.module('Movies.system').controller('IndexCtrl', ['$scope', '$http', '$lo
         });
     };
 
+    // Get Twitter share count
+    $http.jsonp('http://urls.api.twitter.com/1/urls/count.json?url=http://showing.io/&callback=JSON_CALLBACK').
+      success(function(data, status, headers, config) {
+        $scope.count = data.count;
+
+        }).
+        error(function(data, status, headers, config) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+        });
+
 }]);

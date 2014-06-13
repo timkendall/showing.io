@@ -38,12 +38,64 @@ nav {
   border-bottom: 1px solid #1a1a1a;
   background: rgba(47, 52, 58, 0.8);
   overflow: hidden;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  /* works with row or column */
+  flex-direction: row;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+nav a.twitter {
+  display: block;
+  overflow: hidden;
+  text-align: center;
+  font-size: 14px;
+  margin: 0 auto;
+  color: #fff;
+  text-decoration: none;
+  background: #181B1E;
+  width: 40px;
+  height: 40px;
+  line-height: 45px;
+  border-top-left-radius: 99px;
+  border-bottom-left-radius: 99px;
+  border-top-right-radius: 99px;
+  border-bottom-right-radius: 99px;
+  transition: all 0.3s ease-in-out;
+}
+nav a.twitter i {
+  display: inline;
+  line-height: 0px;
+}
+nav a.twitter div.count {
+  display: none;
+  opacity: 0;
+}
+nav a.twitter:hover {
+  width: 80px;
+  background: #F01700;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+nav a.twitter:hover div.icon > i {
+  text-align: left;
+}
+nav a.twitter:hover div.count {
+  opacity: 1;
+  display: inline;
+  -webkit-animation-name: growIn;
+  animation-name: growIn;
+  -webkit-animation-duration: 0.3s;
+  animation-duration: 0.3s;
+}
+nav .finder {
+  display: inline;
 }
 nav .form-control {
   float: right;
-  position: relative;
-  top: 0;
-  right: 0;
   width: 200px;
   height: 50px;
   text-align: left;
@@ -69,6 +121,7 @@ nav .search {
   border-bottom-left-radius: 99px;
   float: right;
   transition: all 0.3s ease-in-out;
+  margin-left: auto;
 }
 nav .search-outer {
   position: absolute;
@@ -104,9 +157,6 @@ nav .form-control:focus + .search {
 }
 nav .btn-group {
   float: left;
-  position: relative;
-  top: 0;
-  left: 0;
   opacity: 1 !important;
   border-top-right-radius: 99px;
   border-bottom-right-radius: 99px;
@@ -453,13 +503,16 @@ i.rating {
   animation-duration: 0.5s;
 }
 
+.view {
+  padding-bottom: 20px !important;
+}
+
 .movieGrid {
   margin: 0;
   padding: 0;
   list-style: none;
   position: relative;
   width: 100%;
-  z-index: 8;
 }
 .movieGrid li:hover {
   -webkit-transform: translateY(-10px);
@@ -471,7 +524,8 @@ i.rating {
   margin: 20px 0 0 20px;
   width: 16.6666667%;
   width: calc((100% / 6) - 25px);
-  max-height: 100%;
+  height: 0;
+  padding-bottom: 22%;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
   -webkit-backface-visibility: hidden;
@@ -487,29 +541,37 @@ i.rating {
 .movieGrid li a {
   box-shadow: 0px 0px 3px #000;
 }
-.movieGrid li a, .movieGrid li a > img {
-  display: block;
-  width: 100%;
+.movieGrid li a, .movieGrid li a > .img {
   cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
-.movieGrid li a > img {
+.movieGrid li a > .img {
   z-index: 8;
   max-width: 100%;
   transition: all 0.3s linear;
 }
-.movieGrid li a > div {
+.movieGrid li a div.img {
+  opacity: 1 !important;
+  z-index: 7;
+}
+.movieGrid li a div.details {
+  z-index: 8;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: radial-gradient(  rgba(0, 0, 0, 0), black);
+}
+.movieGrid li a div {
   position: absolute;
   padding: 0 20px;
   left: 0px;
   top: 0px;
   right: 0px;
   bottom: 0px;
-  background-color: rgba(0, 0, 0, 0);
-  background-image: radial-gradient(  rgba(0, 0, 0, 0), black);
   display: -webkit-flex;
   display: -moz-flex;
   display: -ms-flex;
@@ -525,14 +587,13 @@ i.rating {
   text-align: center;
   cursor: pointer;
   opacity: 0;
-  border: 2px solid #f5e117;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   transition: opacity 0.3s ease-in-out;
 }
-.movieGrid li a > div h3 {
+.movieGrid li a div h3 {
   width: 100%;
   color: #fff;
   text-transform: uppercase;
@@ -547,7 +608,7 @@ i.rating {
   -webkit-animation-duration: 0.5s;
   animation-duration: 0.5s;
 }
-.movieGrid li a > div h4 {
+.movieGrid li a div h4 {
   font-size: 1.1em;
   color: #fff;
   font-weight: 300;
@@ -556,7 +617,7 @@ i.rating {
   -webkit-animation-duration: 0.5s;
   animation-duration: 0.5s;
 }
-.movieGrid li a > div i {
+.movieGrid li a div i {
   font-size: 1.6em;
   color: #fff;
   -webkit-animation-name: flipOutY;
@@ -564,27 +625,22 @@ i.rating {
   -webkit-animation-duration: 0.5s;
   animation-duration: 0.5s;
 }
-.movieGrid li a > div .percent {
+.movieGrid li a div .percent {
   font-size: 0.8em;
   font-weight: 100;
   margin-left: -4px;
 }
-.movieGrid li a:hover > img {
+.movieGrid li a:hover > .img {
   -webkit-filter: blur(20px) contrast(120%);
   -moz-filter: blur(20px) contrast(120%);
   -ms-filter: blur(20px) contrast(120%);
   -o-filter: blur(20px) contrast(120%);
   filter: blur(20px) contrast(120%);
   transition: all 0.3s linear;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-perspective: 1000;
-  perspective: 1000;
 }
 .movieGrid li a:hover > div {
   opacity: 1;
+  border: 2px solid #f5e117;
   transition: opacity 0.3s linear;
 }
 .movieGrid li a:hover > div h3 {
@@ -633,12 +689,14 @@ i.rating {
   .movieGrid li {
     width: 20%;
     width: calc((100% / 5) - 24px);
+    padding-bottom: 25%;
   }
 }
 @media screen and (max-width: 945px) {
   .movieGrid li {
     width: 25%;
     width: calc((100% / 4) - 25px);
+    padding-bottom: 32%;
   }
   .movieGrid li a > div > h3 {
     font-size: 1.4em;
@@ -653,6 +711,7 @@ i.rating {
   .movieGrid li {
     width: 33.333333%;
     width: calc((100% / 3) - 25px);
+    padding-bottom: 41%;
   }
   .movieGrid li a > div > h3 {
     font-size: 1.4em;
@@ -662,6 +721,7 @@ i.rating {
   .movieGrid li {
     width: 50%;
     width: calc((100% / 2) - 30px);
+    padding-bottom: 65%;
   }
   .movieGrid li a > div > h3 {
     font-size: 1.3em;
@@ -671,6 +731,7 @@ i.rating {
   .movieGrid li {
     margin: 3%;
     width: 94%;
+    padding-bottom: 90%;
   }
 }
 .loading:before {
@@ -736,5 +797,25 @@ i.rating {
   100% {
     transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
     -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+  }
+}
+
+@-webkit-keyframes growIn {
+  0% {
+    -webkit-transform: scale(0, 0);
+  }
+
+  100% {
+    -webkit-transform: scale(1, 1);
+  }
+}
+
+@keyframes growIn {
+  0% {
+    webkit-transform: scale(0, 0);
+  }
+
+  100% {
+    webkit-transform: scale(1, 1);
   }
 }
