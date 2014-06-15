@@ -76,9 +76,10 @@ nav {
     @include transition (all 0.3s ease-in-out);
 
     i {
-      //float: left;
       display: inline;
       line-height: 0px; // Why?
+      @include animation-name(growIn);
+      @include animation-duration(0.3s);
     }
 
     div.count {
@@ -90,20 +91,20 @@ nav {
   }
 
   a.twitter:hover {
-    width: 80px;
+    width: 60px;
     background: #F01700;
     cursor: pointer;
     @include transition (all 0.3s ease-in-out);
 
-    div.icon > i {
-      text-align: left;
+    i {
+      display: none;
     }
 
     div.count {
       opacity: 1;
       display: inline;
       @include animation-name(growIn);
-       @include animation-duration(0.3s);
+      @include animation-duration(0.3s);
     }
   }
 
@@ -115,7 +116,7 @@ nav {
   .form-control {
     float: right;
 
-    width: 200px;
+    width: 166px;
     height: 50px;
     text-align: left;
     padding-left: 0;
@@ -528,13 +529,14 @@ footer {
 // Ratings fill (only works for webkit :( )
 i.rating {
   font-size: 1.6em;
-  background-clip: text;
   text-fill-color: transparent;
   text-stroke-width: 2px;
   text-stroke-color: rgba(213,43,25,1);
-  -moz-text-fill-color: transparent;
+  -moz-text-fill-color: transparent; // Doesn't exist atm
   -moz-text-stroke-width: 2px;
   -moz-text-stroke-color: rgba(213,43,25,1);
+  background-clip: text;
+  -moz-background-clip: text; // Doesn't exist atm
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke-width: 2px;
@@ -557,9 +559,16 @@ i.rating {
   list-style: none;
   position: relative;
   width: 100%;
+  @include perspective(1000);
+  @include transform-style(preserve-3d);
 
+  // Cool effect on hover of movie
   li:hover {
-    @include transform(translateY(-10px));
+   //@include transform(rotateY(0deg));
+    @include transform(scale(1.1,1.1));
+
+    //@include transform-origin(right center);
+    @include transform-style(preserve-3d);
   }
 
   li {
@@ -694,6 +703,9 @@ i.rating {
         //@include hardware-acceleration();
       }
 
+      a:hover {
+      }
+
       a:hover > div {
         opacity: 1;
         border: 2px solid $yellow;
@@ -781,6 +793,7 @@ i.rating {
 }
 
 @media screen and (max-width: 660px) {
+
   .movieGrid {
     li {
       width: 33.333333%; // Fallback
@@ -796,6 +809,20 @@ i.rating {
 }
 
 @media screen and (max-width: 400px) {
+  nav {
+    .btn-default {
+      font-weight: 300;
+    }
+
+    .form-control {
+      // Hide search
+      margin-right: -166px;
+    }
+
+    .form-control:focus {
+      margin-right: 0;
+    }
+  }
   .movieGrid {
     li {
       width: 50%; // Fallback
@@ -822,9 +849,7 @@ i.rating {
   }
 }
 
-.loading {
-
-}
+.loading {}
 
 .loading:before {
   display: block;

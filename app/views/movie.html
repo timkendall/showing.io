@@ -1,28 +1,46 @@
-<div class="wrapper">
-  <div class="upper">
+<div class="close" ng-click="closeModal()" w-mousetrap="{esc: closeModal}">
+    <i class="fa fa-times"></i>
+</div>
 
+<div class="left">
 
+    <h1>{{current.title}}
+    </h1>
+    <small>{{current.year}} - {{current.mpaa_rating}}</small>
 
-    <h1>Title</h1>
-    <small>2011</small>
-
-    <p>Synopsis...</p>
+    <p>{{current.synopsis | words:current.textLength}} <a read-more ng-click="changeLength(current)">Show more</a></p>
 
     <h3>Cast</h3>
-    <h4>Andy Sandberg "George", Rick Nar "Tom"</h4>
+    <h4>
+    <span ng-repeat="member in current.abridged_cast">{{member.name}} <span>"{{member.characters[0]}}"</span>, </span>
+    </h4>
 
-    <div class="circle">
-      <h3>Trailers</h3>
+    <h3>Trailers</h3>
+    <!-- Show a little loader-->
+    <div class="loading" ng-show="!current.trailers.clips"></div>
+
     <ul>
-      <li><a href="">Trailer 1</a></li>
-      <li><a href="">Trailer 2</a></li>
-      <li><a href="">Trailer 3</a></li>
+        <li ng-repeat="trailer in current.trailers.clips">
+            <a ng-href="{{trailer.links.alternate}}" target="_blank">
+            {{trailer.title}}
+            <time>{{trailer.duration}}</time>
+            </a>
+        </li>
     </ul>
-    </div>
+    <ul>
 
-
-  </div>
-
-  <div class="lower">
-  </div>
+    </ul>
 </div>
+<div class="right">
+    <div class="poster">
+        <img ng-src="{{current.posters.original}}" />
+        <div>
+            <h3>
+            <i class="fa fa-heart rating" ratometer="{{movie.ratings.audience_score}}"></i> <br />
+            <div class="percent">{{current.ratings.audience_score}}</div>
+            </h3>
+        </div>
+    </div>
+</div>
+
+<!-- end modal -->

@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="bower_components/molten/molten.css" />
         <!-- endbower -->
         <!-- endbuild -->
+        <link href="bower_components/pace/themes/pace-theme-fill-left.css" rel="stylesheet" />
         <link rel="stylesheet" href="styles/bootstrap_custom/css/bootstrap.min.css">
         <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.min.css">
         <!-- build:css styles/main.css -->
@@ -36,55 +37,9 @@
             <h3>crafted by <a href="http://timkendall.com">Tim Kendall</a> <i class="fa fa-star"></i> <b>about</b></h3>
         </div>-->
 
-        <!-- Start Modal (should put this in seprate file) -->
-        <div class="detailed" style="display:none" modal>
-            <div class="close" ng-click="closeModal()" w-mousetrap="{esc: closeModal}">
-                <i class="fa fa-times"></i>
-            </div>
-
-            <div class="left">
-
-            <h1>{{current.title}}
-            </h1>
-            <small>{{current.year}} - {{current.mpaa_rating}}</small>
-
-            <p>{{current.synopsis | words:current.textLength}} <a read-more ng-click="changeLength(current)">Show more</a></p>
-
-            <h3>Cast</h3>
-            <h4>
-                <span ng-repeat="member in current.abridged_cast">{{member.name}} <span>"{{member.characters[0]}}"</span>, </span>
-            </h4>
-
-
-            <h3>Trailers</h3>
-                <!-- Show a little loader-->
-                <div class="loading" ng-show="!current.trailers.clips"></div>
-
-                <ul>
-                    <li ng-repeat="trailer in current.trailers.clips">
-                        <a ng-href="{{trailer.links.alternate}}" target="_blank">
-                            {{trailer.title}}
-                            <time>{{trailer.duration}}</time>
-                        </a>
-                    </li>
-                </ul>
-            <ul>
-
-            </ul>
-            </div>
-            <div class="right">
-                <div class="poster">
-                    <img ng-src="{{current.posters.original}}" />
-                    <div>
-                        <h3>
-                            <i class="fa fa-heart rating" ratometer="{{movie.ratings.audience_score}}"></i> <br />
-                            <div class="percent">{{current.ratings.audience_score}}</div>
-                        </h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end modal -->
+        <!-- Start Modal (should put this in seperate file) -->
+        <div class="detailed" style="display:none"  modal>
+       </div>
 
         <!-- Start Main -->
         <div class="grid rows split80 bottom">
@@ -151,7 +106,8 @@
                         <a href="#!/upcoming" class="btn btn-default" ng-click="clearMovies()" ng-class='{ active: isActive("upcoming")}'>Upcoming</a>
                     </div>
 
-                    <a href="http://twitter.com/home?status=http://showing.io/%20is%20a%20simple%20webapp%20for%20seeing%20what%20movies%20are%20playing%20via%20@tboytim" class="twitter" target="_blank">
+                    <a href="http://twitter.com/home?status=http://showing.io/%20is%20a%20simple%20webapp%20for%20checking%20what%20movies%20are%20playing%20via%20@tboytim" class="twitter" target="_blank"onclick="window.open(this.href, 'mywin',
+'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;">
                         <i class="fa fa-twitter fa-lg "></i>
                         <div class="count">{{count}}</div>
                     </a>
@@ -198,6 +154,7 @@
         <script src="bower_components/mousetrap/mousetrap.js"></script>
         <script src="bower_components/mgo-mousetrap/wMousetrap.js"></script>
         <script src="bower_components/angular-truncate/src/truncate.js"></script>
+        <script src="bower_components/pace/pace.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
@@ -218,12 +175,11 @@
         <script src="scripts/directives/modal.js"></script>
         <script src="scripts/directives/read-more.js"></script>
         <!-- Application Services -->
-        <script src="scripts/services/global.js"></script>
+
         <!-- Application Controllers -->
         <script src="scripts/controllers/index.js"></script>
 
         <script src="scripts/init.js"></script>
-
 
 </body>
 </html>

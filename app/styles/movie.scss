@@ -219,3 +219,9 @@ $pink: #D8548D;
     @include border-bottom-radius(5px);
   }
 }
+
+@media screen and (max-width: 400px) {
+  .left, .right {
+    width: 100%;
+  }
+}
