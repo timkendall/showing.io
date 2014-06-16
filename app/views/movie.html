@@ -1,5 +1,5 @@
 <div class="close" ng-click="closeModal()" w-mousetrap="{esc: closeModal}">
-    <i class="fa fa-times"></i>
+    X
 </div>
 
 <div class="left">
@@ -8,7 +8,7 @@
     </h1>
     <small>{{current.year}} - {{current.mpaa_rating}}</small>
 
-    <p>{{current.synopsis | words:current.textLength}} <a read-more ng-click="changeLength(current)">Show more</a></p>
+    <p>{{current.synopsis}}</p>
 
     <h3>Cast</h3>
     <h4>

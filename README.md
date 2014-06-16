@@ -4,11 +4,13 @@ Showing.io
 Display current movies in box office with Rotten Tomatoes ratings and trailers. Made this over a weekend and perfected it over a couple of weeks. Wanted a quick way see what movies are playing in theaters. May add features later.
 
 ## TODO
+  - Sort by genre (would have added if Rotten Tomatoes inlcuded it in their playing API)
   - Change close 'X' to bigger and thinner
+  - Truncate movie synopsis's
+  - Improve movie detail view
   - Finish responsive design
   - Polyfill for `-moz-background-clip: text;`
-  - Save sorting prefs in localStorage
-  - Cache API requests (Firebase maybe or localStorage)
+  - Cache API requests & user prefs (Firebase maybe and/or localStorage)
 
 ## Development
 
@@ -28,6 +30,7 @@ Start server and SASS compiler
 
 ## Credits
   - [Full-width flexible grid](http://tympanus.net/codrops/2013/04/17/responsive-full-width-grid/)
+  - [Flexible-grid equal div heights](galen.in/lEJP)
   - [Random class Angualr directive](http://www.whatibroke.com/?p=938)
   - [JSONP Angular.js Fix](http://stackoverflow.com/questions/12066002/parsing-jsonp-http-jsonp-response-in-angular-js)
 

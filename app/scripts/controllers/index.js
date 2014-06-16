@@ -18,9 +18,8 @@ angular.module('Movies.system').controller('IndexCtrl', ['$scope', '$http', '$lo
     ];
 
     // Helper function for truncate directive
-    $scope.changeLength = function(synopsis) {
-      $scope.$broadcast('truncating-text');
-      synopsis.textLength = 9999;
+    $scope.changeLength = function (length) {
+      console.log('length: ' + length);
     }
 
     $scope.getTrailers = function(id) {
