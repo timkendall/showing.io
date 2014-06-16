@@ -559,16 +559,12 @@ i.rating {
   list-style: none;
   position: relative;
   width: 100%;
-  @include perspective(1000);
+  @include perspective(1000); // For later if we want to do some neat 3d stuff
   @include transform-style(preserve-3d);
 
-  // Cool effect on hover of movie
+  // Effect on hover of movie
   li:hover {
-   //@include transform(rotateY(0deg));
-    @include transform(scale(1.1,1.1));
-
-    //@include transform-origin(right center);
-    @include transform-style(preserve-3d);
+   @include transform(translateY(-10px));
   }
 
   li {

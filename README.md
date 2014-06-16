@@ -4,6 +4,7 @@ Showing.io
 Display current movies in box office with Rotten Tomatoes ratings and trailers. Made this over a weekend and perfected it over a couple of weeks. Wanted a quick way see what movies are playing in theaters. May add features later.
 
 ## TODO
+  - Change close 'X' to bigger and thinner
   - Finish responsive design
   - Polyfill for `-moz-background-clip: text;`
   - Save sorting prefs in localStorage
@@ -26,12 +27,11 @@ Start server and SASS compiler
         $ gulp watch
 
 ## Credits
-  -[Full-width flexible grid](http://tympanus.net/codrops/2013/04/17/responsive-full-width-grid/)
-  -[Random class Angualr directive](http://www.whatibroke.com/?p=938)
-  -[JSONP Angular.js Fix](http://stackoverflow.com/questions/12066002/parsing-jsonp-http-jsonp-response-in-angular-js)
+  - [Full-width flexible grid](http://tympanus.net/codrops/2013/04/17/responsive-full-width-grid/)
+  - [Random class Angualr directive](http://www.whatibroke.com/?p=938)
+  - [JSONP Angular.js Fix](http://stackoverflow.com/questions/12066002/parsing-jsonp-http-jsonp-response-in-angular-js)
 
-LICENSE
-===
+## LICENSE
 
 The MIT License (MIT)
 
