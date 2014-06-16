@@ -30,7 +30,7 @@ Start server and SASS compiler
 
 ## Credits
   - [Full-width flexible grid](http://tympanus.net/codrops/2013/04/17/responsive-full-width-grid/)
-  - [Flexible-grid equal div heights](galen.in/lEJP)
+  - [Flexible-grid equal div heights](http://galen.in/lEJP)
   - [Random class Angualr directive](http://www.whatibroke.com/?p=938)
   - [JSONP Angular.js Fix](http://stackoverflow.com/questions/12066002/parsing-jsonp-http-jsonp-response-in-angular-js)
 
