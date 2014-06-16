@@ -1,12 +1,13 @@
 'use strict';
 
-angular.module('Movies.system').controller('IndexCtrl', ['$scope', '$http', '$location', 'Global', function ($scope, $http, $location, Global) {
+angular.module('Movies.system').controller('IndexCtrl', ['$scope', '$http', '$location',
+  function($scope, $http, $location, Global) {
     $scope.global = Global;
-
     $scope.movies = [];
     $scope.current = {};
 
-    $scope.order = 'release_dates.theater';
+    // For sorting (release/rating)
+    $scope.order = '-ratings.audience_score';
 
     // List classes for random delays
     $scope.classes = [
@@ -16,131 +17,100 @@ angular.module('Movies.system').controller('IndexCtrl', ['$scope', '$http', '$lo
       'delay-50ms'
     ];
 
-    $scope.changeLength = function (synopsis) {
-        $scope.$broadcast('truncating-text');
-        synopsis.textLength = 9999;
+    // Helper function for truncate directive
+    $scope.changeLength = function (length) {
+      console.log('length: ' + length);
     }
 
-    $scope.getTrailers = function (id) {
-      console.log('getting links')
+    $scope.getTrailers = function(id) {
       $http.jsonp('http://api.rottentomatoes.com/api/public/v1.0/movies/' + id + '/clips.json?apikey=hj3r7yx59y8j6z6wvrv3r65a&limit=20&callback=JSON_CALLBACK').
-        success(function(data, status, headers, config) {
-          // this callback will be called asynchronously
-          // when the response is available
-
-          $scope.current.trailers = data;
-        }).
-        error(function(data, status, headers, config) {
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-
-        });
+      success(function(data, status, headers, config) {
+        $scope.current.trailers = data;
+      }).
+      error(function(data, status, headers, config) {});
     }
 
-    $scope.closeMenu = function () {
+    // Open/close events
+    $scope.closeMenu = function() {
       $scope.$broadcast('menu-closing');
     }
 
-    $scope.openMenu = function () {
+    $scope.openMenu = function() {
       $scope.$broadcast('menu-opening');
     }
 
-    $scope.closeModal = function () {
+    $scope.closeModal = function() {
       $scope.$broadcast('modal-closing');
     }
 
-    $scope.openModal = function (id) {
+    // Modal helper function, set current movie and get its trailers
+    $scope.openModal = function(id) {
       $scope.$broadcast('modal-opening');
 
       // Find correct movie
-      /*
-      $scope.movies.forEach(function (elem, index, array) {
-        if (elem.id === id)  {
+      $scope.movies.forEach(function(elem, index, array) {
+        if (elem.id === id) {
           // Set current
-          $scope.current = $scope.movies[index];
-
+          $scope.current = elem;
           // Grab current's trailers
-          //$scope.getTrailers($scope.current.id);
-          console.log('boom set current')
-        }
-      });*/
-
-      for (var i = 0; i < $scope.movies.length; ++i) {
-        if ($scope.movies[i].id === id) {
-          $scope.current = $scope.movies[i];
-          $scope.current.textLength = 60;
-
           $scope.getTrailers($scope.current.id);
-          break;
         }
-      }
-
+      });
     }
 
-    // Highlight current tab
-    $scope.isActive = function (view) {
-      return ( '/' + view ) === $location.path();
+    // Helper function, highlight current tab
+    $scope.isActive = function(view) {
+      return ('/' + view) === $location.path();
     };
 
-    $scope.clearMovies = function () {
+    // Helper function, clear $scope.movies to avoid seeing old data (can improve this)
+    $scope.clearMovies = function() {
       $scope.movies = [];
     }
 
-    $scope.getPlaying = function () {
+    $scope.getPlaying = function() {
       $http.jsonp('http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?apikey=hj3r7yx59y8j6z6wvrv3r65a&limit=20&callback=JSON_CALLBACK').
-        success(function(data, status, headers, config) {
-          // this callback will be called asynchronously
-          // when the response is available
-
-          $scope.movies = data.movies;
-          $scope.current = data.movies[0];
-
-        }).
-        error(function(data, status, headers, config) {
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-        });
-    };
-
-    $scope.getOpening = function () {
-      $http.jsonp('http://api.rottentomatoes.com/api/public/v1.0/lists/movies/opening.json?apikey=hj3r7yx59y8j6z6wvrv3r65a&limit=20&callback=JSON_CALLBACK').
-        success(function(data, status, headers, config) {
-          // this callback will be called asynchronously
-          // when the response is available
-
-          $scope.movies = data.movies;
-
-        }).
-        error(function(data, status, headers, config) {
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-        });
-    };
-
-    $scope.getUpcoming = function () {
-      $http.jsonp('http://api.rottentomatoes.com/api/public/v1.0/lists/movies/upcoming.json?apikey=hj3r7yx59y8j6z6wvrv3r65a&limit=20&callback=JSON_CALLBACK').
-        success(function(data, status, headers, config) {
-          // this callback will be called asynchronously
-          // when the response is available
-
-          $scope.movies = data.movies;
-
-        }).
-        error(function(data, status, headers, config) {
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-        });
-    };
-
-    // Get Twitter share count
-    $http.jsonp('http://urls.api.twitter.com/1/urls/count.json?url=http://showing.io/&callback=JSON_CALLBACK').
       success(function(data, status, headers, config) {
-        $scope.count = data.count;
+        $scope.movies = data.movies;
+      }).
+      error(function(data, status, headers, config) {
+        // Should handle errors...
+      });
+    };
 
-        }).
-        error(function(data, status, headers, config) {
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-        });
+    $scope.getOpening = function() {
+      $http.jsonp('http://api.rottentomatoes.com/api/public/v1.0/lists/movies/opening.json?apikey=hj3r7yx59y8j6z6wvrv3r65a&limit=20&callback=JSON_CALLBACK').
+      success(function(data, status, headers, config) {
+        $scope.movies = data.movies;
 
-}]);
+      }).
+      error(function(data, status, headers, config) {
+        // Should handle errors...
+      });
+    };
+
+    $scope.getUpcoming = function() {
+      $http.jsonp('http://api.rottentomatoes.com/api/public/v1.0/lists/movies/upcoming.json?apikey=hj3r7yx59y8j6z6wvrv3r65a&limit=20&callback=JSON_CALLBACK').
+      success(function(data, status, headers, config) {
+        $scope.movies = data.movies;
+        // Get genres (unfortuanetly have to may second API call b.c. genere field was left out of data)
+
+      }).
+      error(function(data, status, headers, config) {
+        // Should handle errors...
+      });
+    };
+
+    // Helper function, get Twitter share count
+    $http.jsonp('http://urls.api.twitter.com/1/urls/count.json?url=http://showing.io/&callback=JSON_CALLBACK').
+    success(function(data, status, headers, config) {
+      $scope.count = data.count;
+
+    }).
+    error(function(data, status, headers, config) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+    });
+
+  }
+]);

@@ -29,6 +29,8 @@
   color: #fff;
   text-shadow: none;
   opacity: 0.6;
+  font-size: 48px;
+  font-weight: 100;
   transition: all 0.2s ease-in-out;
 }
 .detailed .close:hover {
@@ -67,6 +69,7 @@
 .detailed p {
   color: #fff;
   font-weight: 100;
+  cursor: pointer;
 }
 .detailed small {
   color: rgba(255, 255, 255, 0.6);
@@ -130,12 +133,10 @@
 .right .poster {
   position: relative;
   width: calc(100% / 2);
-  border: 2px solid #f5e117;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  box-shadow: 0px 0px 3px #000;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
   -webkit-animation-duration: 1s;
   animation-duration: 1s;
   -webkit-animation-delay: 0.5s;
@@ -191,8 +192,14 @@
 .right img {
   width: 100%;
   display: block;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+@media screen and (max-width: 400px) {
+  .left, .right {
+    width: 100%;
+  }
 }

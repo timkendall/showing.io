@@ -69,19 +69,23 @@ nav a.twitter {
 nav a.twitter i {
   display: inline;
   line-height: 0px;
+  -webkit-animation-name: growIn;
+  animation-name: growIn;
+  -webkit-animation-duration: 0.3s;
+  animation-duration: 0.3s;
 }
 nav a.twitter div.count {
   display: none;
   opacity: 0;
 }
 nav a.twitter:hover {
-  width: 80px;
+  width: 60px;
   background: #F01700;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
-nav a.twitter:hover div.icon > i {
-  text-align: left;
+nav a.twitter:hover i {
+  display: none;
 }
 nav a.twitter:hover div.count {
   opacity: 1;
@@ -96,7 +100,7 @@ nav .finder {
 }
 nav .form-control {
   float: right;
-  width: 200px;
+  width: 166px;
   height: 50px;
   text-align: left;
   padding-left: 0;
@@ -483,13 +487,14 @@ footer p b {
 
 i.rating {
   font-size: 1.6em;
-  background-clip: text;
   text-fill-color: transparent;
   text-stroke-width: 2px;
   text-stroke-color: #d52b19;
   -moz-text-fill-color: transparent;
   -moz-text-stroke-width: 2px;
   -moz-text-stroke-color: #d52b19;
+  background-clip: text;
+  -moz-background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke-width: 2px;
@@ -513,6 +518,12 @@ i.rating {
   list-style: none;
   position: relative;
   width: 100%;
+  -webkit-perspective: 1000;
+  perspective: 1000;
+  -webkit-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 .movieGrid li:hover {
   -webkit-transform: translateY(-10px);
@@ -718,6 +729,16 @@ i.rating {
   }
 }
 @media screen and (max-width: 400px) {
+  nav .btn-default {
+    font-weight: 300;
+  }
+  nav .form-control {
+    margin-right: -166px;
+  }
+  nav .form-control:focus {
+    margin-right: 0;
+  }
+
   .movieGrid li {
     width: 50%;
     width: calc((100% / 2) - 30px);
