@@ -1,59 +1,53 @@
-Showing.io
-======
+# Showing
 
-Display current movies in box office with Rotten Tomatoes ratings and trailers. Made this over a weekend and perfected it over a couple of weeks. Wanted a quick way see what movies are playing in theaters. May add features later.
+This README outlines the details of collaborating on this Ember application.
+A short introduction of this app could easily go here.
 
-## TODO
-  - Sort by genre (would have added if Rotten Tomatoes inlcuded it in their playing API)
-  - Change close 'X' to bigger and thinner
-  - Truncate movie synopsis's
-  - Improve movie detail view
-  - Finish responsive design
-  - Polyfill for `-moz-background-clip: text;`
-  - Cache API requests & user prefs (Firebase maybe and/or localStorage)
+## Prerequisites
 
-## Development
+You will need the following things properly installed on your computer.
 
-Note: Please change the Rotten Tomatoes API key if you choose to fork this
+* [Git](http://git-scm.com/)
+* [Node.js](http://nodejs.org/) (with NPM)
+* [Bower](http://bower.io/)
+* [Ember CLI](http://www.ember-cli.com/)
+* [PhantomJS](http://phantomjs.org/)
 
-Install node modules
+## Installation
 
-        $ npm install
+* `git clone <repository-url>` this repository
+* change into the new directory
+* `npm install`
+* `bower install`
 
-Install Bower components
+## Running / Development
 
-        $ bower install
+* `ember server`
+* Visit your app at [http://localhost:4200](http://localhost:4200).
 
-Start server and SASS compiler
+### Code Generators
 
-        $ gulp watch
+Make use of the many generators for code, try `ember help generate` for more details
 
-## Credits
-  - [Full-width flexible grid](http://tympanus.net/codrops/2013/04/17/responsive-full-width-grid/)
-  - [Flexible-grid equal div heights](http://galen.in/lEJP)
-  - [Random class Angualr directive](http://www.whatibroke.com/?p=938)
-  - [JSONP Angular.js Fix](http://stackoverflow.com/questions/12066002/parsing-jsonp-http-jsonp-response-in-angular-js)
+### Running Tests
 
-## LICENSE
+* `ember test`
+* `ember test --server`
 
-The MIT License (MIT)
+### Building
 
-Copyright (c) 2014 Tim Kendall
+* `ember build` (development)
+* `ember build --environment production` (production)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+### Deploying
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+Specify what it takes to deploy your app.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+## Further Reading / Useful Links
+
+* [ember.js](http://emberjs.com/)
+* [ember-cli](http://www.ember-cli.com/)
+* Development Browser Extensions
+  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
+  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+
